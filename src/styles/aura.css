@@ -1,0 +1,973 @@
+/* AURA AstroVitals — Design System
+   A clean, modern health-monitoring mobile-first interface.
+   Purple/lavender palette, rounded cards, soft shadows, bottom navigation. */
+
+:root {
+  /* Primary palette */
+  --aura-bg: #f5f3fa;
+  --aura-surface: #ffffff;
+  --aura-surface-2: #f0edf7;
+  --aura-surface-3: #e8e4f2;
+  --aura-border: rgba(120, 100, 170, 0.12);
+  --aura-border-strong: rgba(120, 100, 170, 0.22);
+
+  /* Text */
+  --aura-text: #1a1625;
+  --aura-text-secondary: #6b6580;
+  --aura-text-muted: #9e96b0;
+
+  /* Brand colors */
+  --aura-purple: #7c5cfc;
+  --aura-purple-light: #a78bfa;
+  --aura-purple-bg: rgba(124, 92, 252, 0.08);
+  --aura-purple-bg-hover: rgba(124, 92, 252, 0.14);
+  --aura-on-purple: #ffffff;
+
+  /* Semantic */
+  --aura-green: #22c55e;
+  --aura-green-bg: rgba(34, 197, 94, 0.1);
+  --aura-amber: #f59e0b;
+  --aura-amber-bg: rgba(245, 158, 11, 0.1);
+  --aura-red: #ef4444;
+  --aura-red-bg: rgba(239, 68, 68, 0.1);
+  --aura-blue: #3b82f6;
+  --aura-blue-bg: rgba(59, 130, 246, 0.1);
+  --aura-pink: #ec4899;
+  --aura-pink-bg: rgba(236, 72, 153, 0.1);
+  --aura-teal: #14b8a6;
+  --aura-teal-bg: rgba(20, 184, 166, 0.1);
+  --aura-orange: #f97316;
+  --aura-orange-bg: rgba(249, 115, 22, 0.1);
+
+  /* System colors — cardiovascular, skeletal, muscular, nervous, immune */
+  --sys-cardio: #ef4444;
+  --sys-cardio-bg: rgba(239, 68, 68, 0.08);
+  --sys-skeletal: #a78bfa;
+  --sys-skeletal-bg: rgba(167, 139, 250, 0.08);
+  --sys-muscular: #f97316;
+  --sys-muscular-bg: rgba(249, 115, 22, 0.08);
+  --sys-nervous: #eab308;
+  --sys-nervous-bg: rgba(234, 179, 8, 0.08);
+  --sys-immune: #22c55e;
+  --sys-immune-bg: rgba(34, 197, 94, 0.08);
+
+  /* Typography */
+  --f-display: 'Bricolage Grotesque Variable', 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --f-body: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --f-mono: 'SF Mono', 'Cascadia Code', monospace;
+
+  /* Sizing */
+  --nav-height: 72px;
+  --header-height: 60px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-full: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(26, 22, 37, 0.06);
+  --shadow-md: 0 4px 12px rgba(26, 22, 37, 0.08);
+  --shadow-lg: 0 8px 28px rgba(26, 22, 37, 0.12);
+
+  color-scheme: light;
+}
+
+/* ── Keep old token aliases alive for skillDecay / progressStore ── */
+:root {
+  --sc-green: var(--aura-green);
+  --sc-amber: var(--aura-amber);
+  --sc-amber-dim: var(--aura-amber);
+  --sc-red: var(--aura-red);
+  --sc-blue: var(--aura-blue);
+  --sc-purple: var(--aura-purple);
+  --sc-teal: var(--aura-teal);
+  --sc-text-primary: var(--aura-text);
+  --sc-text-secondary: var(--aura-text-secondary);
+  --sc-bg-primary: var(--aura-bg);
+  --sc-bg-secondary: var(--aura-surface-2);
+  --sc-glass-border: var(--aura-border);
+  --panel: var(--aura-bg);
+  --ink: var(--aura-text);
+  --ink-2: var(--aura-text-secondary);
+  --cobalt: var(--aura-purple);
+  --on-cobalt: var(--aura-on-purple);
+  --tape: var(--aura-amber);
+  --mint: var(--aura-green);
+  --flag: var(--aura-red);
+  --line: var(--aura-border);
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { height: 100%; }
+body {
+  background: var(--aura-bg);
+  color: var(--aura-text);
+  font: 400 15px/1.55 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4, h5 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+p { max-width: 62ch; }
+a { color: var(--aura-purple); text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; }
+img, svg { display: block; }
+:focus-visible { outline: 3px solid var(--aura-purple); outline-offset: 2px; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
+
+/* ── App Shell ── */
+.aura-app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+  position: relative;
+  background: var(--aura-bg);
+}
+
+.aura-main {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + 16px);
+}
+
+/* ── Top Header ── */
+.aura-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--aura-bg);
+}
+.aura-header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.aura-logo {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--aura-purple);
+  letter-spacing: -0.02em;
+}
+.aura-logo-sub {
+  font-family: var(--f-display);
+  font-weight: 500;
+  font-size: 12px;
+  color: var(--aura-text-muted);
+  margin-left: 2px;
+}
+.aura-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.aura-header-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--aura-surface);
+  border: 1px solid var(--aura-border);
+  color: var(--aura-text-secondary);
+  transition: background 0.15s, color 0.15s;
+}
+.aura-header-btn:hover { background: var(--aura-surface-2); color: var(--aura-text); }
+
+.aura-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+  flex-shrink: 0;
+}
+.aura-avatar.sm { width: 28px; height: 28px; font-size: 11px; }
+.aura-avatar.lg { width: 48px; height: 48px; font-size: 18px; }
+
+/* ── Status Badge (online/alert) ── */
+.aura-status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--aura-bg);
+  flex-shrink: 0;
+}
+.aura-status-dot.online { background: var(--aura-green); }
+.aura-status-dot.alert { background: var(--aura-red); }
+.aura-status-dot.warning { background: var(--aura-amber); }
+
+/* ── Bottom Navigation ── */
+.aura-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--aura-surface);
+  border-top: 1px solid var(--aura-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 3vw, 36px);
+  height: var(--nav-height);
+  padding-bottom: var(--safe-bottom);
+  z-index: 100;
+  box-shadow: 0 -4px 20px rgba(26, 22, 37, 0.06);
+}
+.aura-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  color: var(--aura-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  transition: color 0.15s;
+  text-decoration: none;
+  position: relative;
+}
+.aura-nav-item:hover { color: var(--aura-text-secondary); }
+.aura-nav-item.active { color: var(--aura-purple); }
+.aura-nav-item.active::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 3px;
+  background: var(--aura-purple);
+  border-radius: 0 0 3px 3px;
+}
+.aura-nav-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.aura-nav-center {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  background: var(--aura-purple);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -20px;
+  box-shadow: 0 4px 14px rgba(124, 92, 252, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.aura-nav-center:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(124, 92, 252, 0.45);
+}
+
+/* ── Cards ── */
+.aura-card {
+  background: var(--aura-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--aura-border);
+  padding: 16px;
+  transition: box-shadow 0.2s;
+}
+.aura-card:hover { box-shadow: var(--shadow-sm); }
+.aura-card.interactive { cursor: pointer; }
+.aura-card.interactive:hover { box-shadow: var(--shadow-md); }
+
+/* ── Section title ── */
+.aura-section-title {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.aura-section-link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--aura-purple);
+}
+
+/* ── Metric Cards ── */
+.aura-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.aura-metric-label {
+  font-size: 12px;
+  color: var(--aura-text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.aura-metric-value {
+  font-family: var(--f-display);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.aura-metric-unit {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--aura-text-secondary);
+  margin-left: 2px;
+}
+.aura-metric-delta {
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+.aura-metric-delta.up { color: var(--aura-green); background: var(--aura-green-bg); }
+.aura-metric-delta.down { color: var(--aura-red); background: var(--aura-red-bg); }
+.aura-metric-delta.neutral { color: var(--aura-text-muted); background: var(--aura-surface-2); }
+
+/* ── Pills / Tags / Badges ── */
+.aura-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--aura-surface-2);
+  color: var(--aura-text-secondary);
+  border: 1px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.aura-pill.active {
+  background: var(--aura-purple-bg);
+  color: var(--aura-purple);
+  border-color: var(--aura-purple);
+}
+.aura-pill:hover:not(.active) { background: var(--aura-surface-3); }
+.aura-pill.small { padding: 3px 8px; font-size: 11px; }
+
+.aura-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--aura-red);
+  color: white;
+}
+
+/* ── Segmented Control ── */
+.aura-tabs {
+  display: flex;
+  background: var(--aura-surface-2);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  gap: 4px;
+}
+.aura-tab {
+  flex: 1;
+  padding: 8px 16px;
+  border-radius: calc(var(--radius-md) - 4px);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--aura-text-secondary);
+  text-align: center;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.aura-tab:hover { color: var(--aura-text); }
+.aura-tab.active {
+  background: var(--aura-surface);
+  color: var(--aura-purple);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Progress Bar ── */
+.aura-progress {
+  height: 6px;
+  background: var(--aura-surface-2);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.aura-progress-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  background: var(--aura-purple);
+  transition: width 0.4s ease;
+}
+
+/* ── Circular Progress (percentage ring) ── */
+.aura-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.aura-ring svg { transform: rotate(-90deg); }
+.aura-ring-track { fill: none; stroke: var(--aura-surface-2); }
+.aura-ring-fill { fill: none; transition: stroke-dashoffset 0.6s ease; }
+.aura-ring-label {
+  position: absolute;
+  font-family: var(--f-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* ── Button ── */
+.aura-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 14px;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+.aura-btn:active { transform: scale(0.97); }
+.aura-btn.primary {
+  background: var(--aura-purple);
+  color: var(--aura-on-purple);
+  box-shadow: 0 2px 8px rgba(124, 92, 252, 0.3);
+}
+.aura-btn.primary:hover { background: #6b4fe0; }
+.aura-btn.secondary {
+  background: var(--aura-surface);
+  color: var(--aura-purple);
+  border: 1.5px solid var(--aura-border-strong);
+}
+.aura-btn.secondary:hover { background: var(--aura-purple-bg); }
+.aura-btn.ghost {
+  background: transparent;
+  color: var(--aura-purple);
+}
+.aura-btn.ghost:hover { background: var(--aura-purple-bg); }
+.aura-btn.danger {
+  background: var(--aura-red);
+  color: white;
+}
+.aura-btn.sm { padding: 6px 14px; font-size: 13px; }
+.aura-btn.lg { padding: 14px 28px; font-size: 16px; border-radius: var(--radius-lg); }
+.aura-btn.full { width: 100%; }
+
+/* ── Sliders / Range ── */
+.aura-slider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.aura-slider-track {
+  flex: 1;
+  height: 8px;
+  background: var(--aura-surface-2);
+  border-radius: var(--radius-full);
+  position: relative;
+  overflow: hidden;
+}
+.aura-slider-fill {
+  height: 100%;
+  background: var(--aura-purple);
+  border-radius: var(--radius-full);
+}
+
+/* ── Body Silhouette / Outline (used in Body View and Medical Event) ── */
+.aura-body-outline {
+  position: relative;
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* ── Alert Cards ── */
+.aura-alert-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px;
+  background: var(--aura-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--aura-border);
+  border-left: 4px solid var(--aura-purple);
+}
+.aura-alert-card.critical { border-left-color: var(--aura-red); }
+.aura-alert-card.warning { border-left-color: var(--aura-amber); }
+.aura-alert-card.advisory { border-left-color: var(--aura-blue); }
+.aura-alert-card.info { border-left-color: var(--aura-teal); }
+
+.aura-alert-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ── Scrollable Row ── */
+.aura-scroll-row {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 0 20px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.aura-scroll-row::-webkit-scrollbar { display: none; }
+
+/* ── Grid ── */
+.aura-grid {
+  display: grid;
+  gap: 12px;
+  padding: 0 20px;
+}
+.aura-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+.aura-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.aura-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* ── Spacing ── */
+.aura-px { padding-left: 20px; padding-right: 20px; }
+.aura-py { padding-top: 16px; padding-bottom: 16px; }
+.aura-gap-sm { gap: 8px; }
+.aura-gap-md { gap: 12px; }
+.aura-gap-lg { gap: 20px; }
+
+/* ── Page transitions ── */
+.aura-page {
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-bottom: 24px;
+  animation: aura-fade-in 0.25s ease;
+}
+@keyframes aura-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Breadcrumb / Page Header ── */
+.aura-page-header {
+  padding: 8px 20px 16px;
+}
+.aura-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--aura-text-muted);
+  margin-bottom: 8px;
+}
+.aura-breadcrumb a { color: var(--aura-purple); }
+.aura-breadcrumb-sep { color: var(--aura-text-muted); }
+.aura-page-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.aura-page-subtitle {
+  font-size: 14px;
+  color: var(--aura-text-secondary);
+  margin-top: 4px;
+}
+
+/* ── System color utilities ── */
+.sys-cardio { color: var(--sys-cardio); }
+.sys-skeletal { color: var(--sys-skeletal); }
+.sys-muscular { color: var(--sys-muscular); }
+.sys-nervous { color: var(--sys-nervous); }
+.sys-immune { color: var(--sys-immune); }
+
+/* ── Modal / Overlay ── */
+.aura-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 22, 37, 0.5);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: aura-overlay-in 0.2s ease;
+}
+@keyframes aura-overlay-in { from { opacity: 0; } to { opacity: 1; } }
+.aura-modal {
+  background: var(--aura-surface);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  padding: 24px 20px;
+  animation: aura-modal-in 0.25s ease;
+}
+@keyframes aura-modal-in { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.aura-modal-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--aura-surface-3);
+  border-radius: var(--radius-full);
+  margin: 0 auto 16px;
+}
+
+/* ── Checkin & forms ── */
+.aura-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.aura-form-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--aura-text-secondary);
+}
+.aura-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1.5px solid var(--aura-border-strong);
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-size: 14px;
+  resize: vertical;
+  min-height: 80px;
+  background: var(--aura-surface);
+  transition: border-color 0.15s;
+}
+.aura-textarea:focus { outline: none; border-color: var(--aura-purple); }
+
+/* ── Responsive desktop layout ── */
+@media (min-width: 768px) {
+  .aura-header {
+    padding: 14px clamp(24px, 4vw, 64px);
+    border-bottom: 1px solid var(--aura-border);
+  }
+
+  .aura-main {
+    padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + 24px);
+  }
+
+  .aura-page-header,
+  .aura-px,
+  .aura-scroll-row,
+  .aura-section-title {
+    padding-left: clamp(24px, 4vw, 64px);
+    padding-right: clamp(24px, 4vw, 64px);
+  }
+
+  .aura-grid {
+    gap: 16px;
+    padding-left: clamp(24px, 4vw, 64px);
+    padding-right: clamp(24px, 4vw, 64px);
+  }
+
+  .aura-nav-item {
+    min-width: 76px;
+  }
+
+  .home-vitals-row,
+  .home-tasks-row {
+    display: grid;
+    overflow: visible;
+  }
+
+  .home-vitals-row {
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  }
+
+  .home-tasks-row {
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  }
+
+  .home-vitals-row > *,
+  .home-tasks-row > * {
+    min-width: 0 !important;
+  }
+}
+
+@media (min-width: 1100px) {
+  .aura-grid.cols-2 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ── Training notice (preserved from Drills) ── */
+.training-notice {
+  padding: 10px 14px;
+  border-left: 4px solid var(--aura-red);
+  background: var(--aura-red-bg);
+  font-weight: 600;
+  font-size: 13px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--aura-text);
+}
+
+/* ── Body Lab overrides for AURA (keep 3D scene functional) ── */
+.lab {
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - var(--nav-height) - var(--header-height));
+}
+.sheets {
+  display: flex;
+  gap: 8px;
+  padding: 12px 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.sheets::-webkit-scrollbar { display: none; }
+.sheet {
+  --c: var(--aura-purple);
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  background: var(--aura-surface);
+  border: 1.5px solid var(--aura-border);
+  border-radius: var(--radius-full);
+  box-shadow: none;
+  margin: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  text-align: center;
+}
+.sheet:first-child { margin-top: 0; }
+.sheet:hover { background: var(--aura-surface-2); border-color: var(--aura-border-strong); }
+.sheet[aria-pressed='true'] {
+  background: var(--aura-purple);
+  color: white;
+  border-color: var(--aura-purple);
+  transform: none;
+  z-index: 2;
+}
+.stage {
+  flex: 1;
+  position: relative;
+  min-height: 300px;
+  background: radial-gradient(ellipse at 50% 38%, var(--aura-surface-2), var(--aura-bg) 70%);
+}
+.stage canvas { display: block; }
+.stage-top {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+  pointer-events: none;
+  z-index: 3;
+}
+.views, .modes {
+  display: flex;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--aura-surface);
+  border: 1px solid var(--aura-border);
+  pointer-events: auto;
+  box-shadow: var(--shadow-sm);
+}
+.views button, .modes button {
+  border: 0;
+  background: transparent;
+  padding: 7px 12px;
+  font-weight: 600;
+  font-size: 13px;
+  border-right: 1px solid var(--aura-border);
+  color: var(--aura-text-secondary);
+}
+.views button:last-child, .modes button:last-child { border-right: 0; }
+.views button:hover, .modes button:hover { background: var(--aura-surface-2); }
+.views button[aria-pressed='true'], .modes button[aria-pressed='true'] {
+  background: var(--aura-purple);
+  color: white;
+}
+.tag {
+  position: absolute;
+  left: 50%;
+  bottom: 46px;
+  transform: translateX(-50%);
+  padding: 5px 14px;
+  background: var(--aura-purple);
+  color: white;
+  font-weight: 700;
+  font-size: 13px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  max-width: calc(100% - 40px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+  box-shadow: var(--shadow-md);
+}
+.hint {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--aura-surface) 90%, transparent);
+  font-size: 12px;
+  color: var(--aura-text-muted);
+  pointer-events: none;
+}
+.info {
+  padding: 20px;
+  border-top: 1px solid var(--aura-border);
+  overflow-y: auto;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.info h2 { font-size: 22px; }
+.info .bone-readout {
+  padding: 4px 10px;
+  border: 1px solid var(--aura-border);
+  border-radius: var(--radius-sm);
+  background: var(--aura-surface-2);
+  font-size: 13px;
+  font-weight: 600;
+  width: fit-content;
+}
+.info .space { padding-left: 12px; border-left: 3px solid var(--aura-purple); font-size: 14px; }
+.info .ask { font: 700 20px/1.2 var(--f-display); }
+.info .score { color: var(--aura-text-secondary); }
+.info .note { color: var(--aura-red); font-weight: 600; }
+.info-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.info-btn {
+  padding: 7px 14px;
+  border-radius: var(--radius-md);
+  background: var(--aura-purple);
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+}
+.info-btn:hover { background: #6b4fe0; }
+.info-btn.secondary { background: var(--aura-surface-2); color: var(--aura-text); }
+.info-btn.secondary:hover { background: var(--aura-surface-3); }
+.part-list { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+.info .part-list li { margin: 0; }
+.part-btn {
+  padding: 5px 10px;
+  border: 1.5px solid var(--aura-border-strong);
+  border-radius: var(--radius-full);
+  background: var(--aura-surface);
+  color: var(--aura-text);
+  font-size: 13px;
+  font-weight: 600;
+}
+.part-btn:hover { background: var(--aura-surface-2); }
+.part-btn[aria-pressed='true'] { background: var(--aura-purple); color: white; border-color: var(--aura-purple); }
+.info button.next {
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  background: var(--aura-purple);
+  color: white;
+  font-weight: 600;
+}
+.info details { border-top: 1px solid var(--aura-border); padding-top: 10px; }
+.info summary { font-weight: 600; cursor: pointer; font-size: 14px; }
+.info li { margin-top: 6px; color: var(--aura-text-secondary); font-size: 14px; }
+
+/* ── Drills restyled ── */
+.drills { padding: 16px 20px 80px; }
+.drills h1 { font-size: 26px; margin-top: 8px; }
+.drills h2 { font-size: 20px; }
+.drills-description { margin-top: 8px; color: var(--aura-text-secondary); font-size: 14px; }
+.drills-kicker { margin-top: 12px; color: var(--aura-text-muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.drills-list { display: grid; gap: 12px; margin-top: 16px; }
+.drills-card, .drills-step, .drills-debrief {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--aura-border);
+  border-radius: var(--radius-md);
+  background: var(--aura-surface);
+  box-shadow: var(--shadow-sm);
+}
+.drills-card h2 { margin-top: 4px; }
+.drills-card > p:not(.drills-kicker) { margin-top: 6px; color: var(--aura-text-secondary); font-size: 14px; }
+.drills-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; }
+.drills-card-footer span, .drills-step-count { color: var(--aura-text-muted); font-weight: 600; font-size: 13px; }
+.drills-action, .drills-back {
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  background: var(--aura-purple);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+.drills-action:hover, .drills-back:hover { background: #6b4fe0; }
+.drills-back { margin-top: 16px; background: var(--aura-surface-2); color: var(--aura-text); border: 1px solid var(--aura-border); }
+.drills-back:hover { background: var(--aura-surface-3); }
+.drills-step-count { margin-bottom: 8px; }
+.drills-narrative { max-width: none; padding: 12px 14px; border-left: 4px solid var(--aura-purple); background: var(--aura-purple-bg); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; font-size: 14px; }
+.drills-step h2 { margin: 14px 0 10px; }
+.drills-options { display: grid; gap: 8px; }
+.drills-option {
+  padding: 12px 14px;
+  border: 1.5px solid var(--aura-border-strong);
+  border-radius: var(--radius-md);
+  background: var(--aura-surface);
+  text-align: left;
+  font-size: 14px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.drills-option:hover:not(:disabled) { background: var(--aura-surface-2); border-color: var(--aura-purple); }
+.drills-option[aria-pressed='true'] { background: var(--aura-purple-bg); border-color: var(--aura-purple); }
+.drills-option:disabled:not([aria-pressed='true']) { cursor: default; opacity: 0.6; }
+.drills-feedback { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--aura-border); }
+.drills-feedback p { margin-top: 4px; color: var(--aura-text-secondary); font-size: 14px; }
+.drills-feedback .drills-action { margin-top: 12px; }
+.drills-debrief h2 { margin: 16px 0 10px; }
+.ground-reply { padding: 14px; border-left: 4px solid var(--aura-blue); background: var(--aura-blue-bg); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.ground-reply p { margin-top: 6px; font-size: 14px; }
+.ground-reply ul { margin: 8px 0 0; padding-left: 20px; }
+.ground-note { color: var(--aura-text-muted); font-size: 12px; }
+.debrief-list { display: grid; gap: 14px; margin: 0 0 16px; padding-left: 22px; }
+.debrief-list li { padding-left: 4px; }
+.debrief-list h3 { font-size: 17px; }
+.debrief-list p { margin-top: 6px; font-size: 14px; }
+.drills-empty { margin-top: 16px; color: var(--aura-text-muted); }
+
+/* ── Stub page ── */
+.stub { padding: 24px 20px; }
+.stub h1 { font-size: 26px; }
+.stub p { margin-top: 8px; color: var(--aura-text-secondary); font-size: 14px; }

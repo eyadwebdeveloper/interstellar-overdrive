@@ -1,0 +1,145 @@
+/* ============================================================
+   Second Chair — Design System
+   Astronaut Autonomy-Readiness Platform
+   ============================================================ */
+
+:root {
+  /* ── Core Palette ── */
+  --sc-bg-deep: #060a14;
+  --sc-bg-primary: #0a0e1a;
+  --sc-bg-secondary: #111827;
+  --sc-bg-tertiary: #1a2236;
+  --sc-bg-elevated: #1e2a42;
+
+  /* ── Accent Colors ── */
+  --sc-amber: #f0a030;
+  --sc-amber-light: #fbbf24;
+  --sc-amber-dim: #b97a1e;
+  --sc-amber-glow: rgba(240, 160, 48, 0.15);
+  --sc-amber-glow-strong: rgba(240, 160, 48, 0.3);
+
+  --sc-blue: #3b82f6;
+  --sc-blue-dim: #2563eb;
+  --sc-blue-glow: rgba(59, 130, 246, 0.15);
+
+  --sc-teal: #14b8a6;
+  --sc-teal-dim: #0d9488;
+  --sc-teal-glow: rgba(20, 184, 166, 0.15);
+
+  --sc-red: #ef4444;
+  --sc-red-dim: #dc2626;
+  --sc-red-glow: rgba(239, 68, 68, 0.15);
+
+  --sc-green: #22c55e;
+  --sc-green-dim: #16a34a;
+  --sc-green-glow: rgba(34, 197, 94, 0.15);
+
+  --sc-purple: #a78bfa;
+  --sc-purple-dim: #8b5cf6;
+  --sc-purple-glow: rgba(167, 139, 250, 0.15);
+
+  /* ── Text ── */
+  --sc-text-primary: #f1f5f9;
+  --sc-text-secondary: #94a3b8;
+  --sc-text-tertiary: #64748b;
+  --sc-text-muted: #475569;
+
+  /* ── Glass ── */
+  --sc-glass-bg: rgba(17, 24, 39, 0.6);
+  --sc-glass-border: rgba(148, 163, 184, 0.1);
+  --sc-glass-border-hover: rgba(148, 163, 184, 0.2);
+  --sc-glass-blur: 16px;
+
+  /* ── Spacing ── */
+  --sc-radius-sm: 8px;
+  --sc-radius-md: 12px;
+  --sc-radius-lg: 16px;
+  --sc-radius-xl: 24px;
+  --sc-radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --sc-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --sc-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --sc-shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --sc-shadow-glow: 0 0 20px var(--sc-amber-glow);
+
+  /* ── Transitions ── */
+  --sc-transition-fast: 150ms ease;
+  --sc-transition-normal: 250ms ease;
+  --sc-transition-slow: 400ms ease;
+
+  /* ── Typography ── */
+  --sc-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sc-font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* ── Sidebar ── */
+  --sc-sidebar-width: 260px;
+  --sc-sidebar-collapsed: 72px;
+  --sc-topbar-height: 64px;
+}
+
+/* ── Reset & Base ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--sc-font-sans);
+  background: var(--sc-bg-deep);
+  color: var(--sc-text-primary);
+  line-height: 1.6;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sc-text-tertiary);
+  border-radius: var(--sc-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sc-text-secondary);
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--sc-amber-glow-strong);
+  color: var(--sc-text-primary);
+}
+
+/* ── Focus ── */
+:focus-visible {
+  outline: 2px solid var(--sc-amber);
+  outline-offset: 2px;
+  border-radius: var(--sc-radius-sm);
+}
+
+/* ── Google Fonts Import ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');

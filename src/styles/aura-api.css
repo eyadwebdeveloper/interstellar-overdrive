@@ -1,0 +1,17 @@
+.api-banner {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border: 1px dashed var(--line, rgba(90, 70, 150, 0.3));
+  border-radius: 10px;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.api-card { margin-top: 12px; }
+.api-list { margin: 8px 0; padding-left: 18px; }
+.api-confidence { display: grid; grid-template-columns: auto 1fr auto; gap: 10px; align-items: center; margin: 10px 0; }
+.api-chart { width: 100%; height: auto; display: block; margin: 8px 0; }
+.api-line { stroke: var(--ink); stroke-width: 2; }
+.api-line-forecast { stroke-dasharray: 5 4; }
+.api-band { fill: var(--ink); opacity: 0.12; }
+.api-today { stroke: var(--ink-soft); stroke-width: 1; stroke-dasharray: 2 3; }

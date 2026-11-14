@@ -1,0 +1,59 @@
+/* AURA extras: new screens (PVT, medical event, 3D body view) and shell polish */
+.aura-skip { position: absolute; left: -999px; top: 8px; background: var(--aura-purple); color: #fff; padding: 8px 14px; border-radius: var(--radius-sm); z-index: 200; }
+.aura-skip:focus { left: 8px; }
+.aura-main { padding-bottom: calc(var(--nav-height) + 16px + var(--safe-bottom)); }
+.aura-main.focus { padding-bottom: var(--safe-bottom); }
+.aura-nav-sos { color: var(--aura-red); }
+.aura-nav-sos .aura-nav-icon { background: var(--aura-red-bg); }
+.aura-nav-item.active .aura-nav-icon { background: var(--aura-purple-bg); }
+.aura-btn:disabled { opacity: .45; cursor: not-allowed; }
+.chip { cursor: pointer; border: 1px solid var(--aura-border-strong); background: var(--aura-surface); padding: 8px 14px; border-radius: var(--radius-full); font-weight: 700; font-size: 14px; }
+.chip.on { background: var(--aura-purple); color: var(--aura-on-purple); border-color: var(--aura-purple); }
+
+/* 3D body view */
+.body-view { display: grid; gap: 12px; padding-bottom: 24px; }
+.body-layers { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; }
+.body-stage { height: 52dvh; min-height: 340px; border-radius: var(--radius-lg); background: radial-gradient(ellipse at 50% 35%, var(--aura-surface) 0%, var(--aura-surface-2) 100%); border: 1px solid var(--aura-border); overflow: hidden; touch-action: pan-y; }
+.body-stage canvas { width: 100% !important; height: 100% !important; }
+.body-loading, .body-hint { text-align: center; color: var(--aura-text-muted); font-size: 13px; padding: 16px; }
+.body-info { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.body-info div { display: grid; }
+.body-info span { color: var(--aura-text-secondary); font-size: 13px; text-transform: capitalize; }
+.body-list { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 14px; }
+
+/* PVT */
+.pvt { padding: 16px 20px 24px; display: grid; gap: 14px; justify-items: center; }
+.pvt-top { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.pvt-bar { width: 100%; }
+.pvt-clock { font: 800 52px/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.pvt-pad { width: min(68vw, 260px); aspect-ratio: 1; border-radius: 50%; border: 10px solid var(--aura-surface-3); background: var(--aura-surface); font: 800 44px var(--f-display); font-variant-numeric: tabular-nums; color: var(--aura-purple); touch-action: manipulation; user-select: none; }
+.pvt-pad.stim { background: var(--aura-purple); color: #fff; border-color: var(--aura-purple-light); }
+.pvt-pad.ready { font-size: 24px; }
+.pvt-hint, .pvt-note { color: var(--aura-text-secondary); font-size: 14px; text-align: center; }
+.pvt-stats { width: 100%; }
+.pvt-result { display: grid; gap: 8px; text-align: center; width: 100%; }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Medical event */
+.med { display: grid; gap: 14px; align-content: start; padding-top: 12px; padding-bottom: 32px; }
+.med-top { display: flex; align-items: center; justify-content: space-between; }
+.med-top h1 { font-size: 18px; }
+.med-steps { list-style: none; display: flex; justify-content: center; gap: 14px; }
+.med-steps li { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font: 700 13px var(--f-body); background: var(--aura-surface-3); color: var(--aura-text-secondary); }
+.med-steps li.on { background: var(--aura-purple); color: #fff; }
+.med-steps li.done { background: var(--aura-green); color: #fff; }
+.med-count { text-align: center; color: var(--aura-text-muted); font-size: 13px; }
+.med-h { font-size: 24px; text-align: center; }
+.med-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.med-tip { color: var(--aura-text-muted); font-size: 13px; text-align: center; margin-inline: auto; }
+.med-banner { background: var(--aura-amber-bg); font-weight: 700; font-size: 14px; }
+.med-list { list-style: none; display: grid; gap: 10px; }
+.med-list label { display: flex; gap: 12px; align-items: flex-start; background: var(--aura-surface); border: 1px solid var(--aura-border); border-radius: var(--radius-md); padding: 12px 14px; cursor: pointer; }
+.med-list input { width: 20px; height: 20px; accent-color: var(--aura-purple); margin-top: 2px; }
+.med-list span { display: grid; }
+.med-list small { color: var(--aura-text-muted); font-size: 12px; }
+.med-queue { display: grid; gap: 4px; font-size: 14px; color: var(--aura-text-secondary); }
+.med-sent { display: grid; gap: 8px; justify-items: center; text-align: center; color: var(--aura-purple); }
+.med-sent p { color: var(--aura-text-secondary); }
+.med-actions { display: grid; }
+.med-actions .aura-btn { width: 100%; justify-content: center; padding: 14px; }
