@@ -432,9 +432,9 @@ export default function HomePage() {
             </h2>
             <p>Your crew clinician and Earth care team, in one place.</p>
             <div className="care-contact">
-              <Avatar name="Dr. Okafor" />
+              <Avatar name="Dr. Mo'men Ashraf" />
               <div>
-                <strong>Dr. Okafor</strong>
+                <strong>Dr. Mo'men</strong>
                 <span>Crew flight surgeon</span>
               </div>
               <i className="connection-dot" />
