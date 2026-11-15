@@ -1,7 +1,7 @@
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv, type Plugin } from 'vite'
 
-// The local AURA FastAPI backend. Override with AURA_API_TARGET when it runs elsewhere.
+// The local AURA Python backend (WSGI/http.server, see https://github.com/eyadwebdeveloper/backend). Override with AURA_API_TARGET when it runs elsewhere.
 const apiTarget = process.env.AURA_API_TARGET ?? 'http://127.0.0.1:8000'
 
 /** Serves api/copilot.ts during `vite dev` / `vite preview` so the copilot works locally with ANTHROPIC_API_KEY in .env.local. */

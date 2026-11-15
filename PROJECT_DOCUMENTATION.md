@@ -59,9 +59,7 @@ The front end requests simulated snapshots through the API client in
 backend is unavailable or returns invalid data, the application uses the
 built-in snapshot data in `src/data/fallbackSnapshot.ts`.
 
-The local Python backend is in the sibling `backend` directory under
-`wired-demo`. It runs the simulator and models at startup, then serves cached
-JSON snapshots from a small HTTP server.
+The Python backend lives in its own repository, https://github.com/eyadwebdeveloper/backend (folder `backend/`). It is deployed on PythonAnywhere at https://eyad1ashraff.pythonanywhere.com. It runs the simulator and models once, then serves cached JSON snapshots. For local development it can also run with `python server.py` on `127.0.0.1:8000`.
 
 ### 6. API
 
@@ -159,4 +157,4 @@ scores are illustrative and are not medical predictions or recommendations.
 | `src/stores/` | Zustand state and local persistence. |
 | `src/styles/` | Global, design-system, and feature-specific styles. |
 | `public/models/` | On-demand anatomy model assets. |
-| `../backend/` | Python simulation, model pipeline, and local API server. |
+| `https://github.com/eyadwebdeveloper/backend` | Python simulation, model pipeline and API (separate repository, deployed on PythonAnywhere). |

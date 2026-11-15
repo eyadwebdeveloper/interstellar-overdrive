@@ -181,6 +181,20 @@ If the atlas files can't open (not installed, or no WebGL2), `BodyTwin.tsx` prov
 
 The optional Tier 0/1/2 backend is configured in `src/api/`. Without it the app uses a labelled fallback snapshot. See [.env.example](.env.example).
 
+## Backend (live API)
+
+The Tier 0/1/2 AI and the game-session AI run in a separate Python service. It is **not** bundled in this repository.
+
+- **Source code:** [https://github.com/eyadwebdeveloper/backend](https://github.com/eyadwebdeveloper/backend) (folder `backend/`, entry point `server.py`, WSGI callable `application`)
+- **Live API (PythonAnywhere):** https://eyad1ashraff.pythonanywhere.com
+- **Routes:** `GET /api/health`, `GET /api/astronauts/<crew-id>/snapshot`, `POST /api/game/assess`
+
+To point this site at it, set `VITE_AURA_API_BASE=https://eyad1ashraff.pythonanywhere.com/api` at build time. Without it the app uses `/api` (the Vite proxy to `127.0.0.1:8000` in development) and falls back to a labelled built-in snapshot if the backend is unreachable.
+
+## Astro-Shield game
+
+The companion game (Next.js, separate project) sends each finished run to `POST /api/game/assess` on the same backend. Set `NEXT_PUBLIC_AURA_API=https://eyad1ashraff.pythonanywhere.com` to change the URL. If the backend is down the game keeps working and shows "AI coach is offline".
+
 ## Deploying
 
 The app is a static single-page build plus one optional serverless function.

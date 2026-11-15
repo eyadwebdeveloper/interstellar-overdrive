@@ -58,6 +58,6 @@ Still open from the original task list: Vitest/Playwright test files, PWA offlin
 - `src/stores/auraStore.ts` (live / fallback / loading), `src/hooks/useAura.ts` (`useAuraSync`, `useAlerts`, `useRisk`, `useForecast`).
 - `src/data/fallbackSnapshot.ts`: original demo alerts plus static forecast and risk when the backend is unreachable.
 - UI: `SimulatedBanner`, `RiskCard`, `ForecastPanel` on Dashboard; banner on Alerts.
-- The sibling `../backend/` folder now contains a local Python HTTP server, the AURA runtime copy, and snapshot export. It runs the simulator/models once at startup and serves cached snapshots matching `contract.ts`; the first start takes about 10-30 seconds. The demo crew IDs map to virtual astronaut IDs.
-- Start the backend with `cd ../backend/aura_ai_kit; python -m pip install -r requirements.txt; cd ..; python server.py`, wait for its ready message, then run Vite. Full steps are in `../README.md`.
+- The backend lives at https://github.com/eyadwebdeveloper/backend (deployed at https://eyad1ashraff.pythonanywhere.com). It contains a local Python HTTP server, the AURA runtime copy, and snapshot export. It runs the simulator/models once at startup and serves cached snapshots matching `contract.ts`; the first start takes about 10-30 seconds. The demo crew IDs map to virtual astronaut IDs.
+- Start the backend with `cd ../backend/aura_ai_kit; python -m pip install -r requirements.txt; cd ..; python server.py`, wait for its ready message, then run Vite. Full steps are in the backend repository README (https://github.com/eyadwebdeveloper/backend).
 - Checks: `_technical_support/aura-integration/` (`proxy_check.sh`, `run_adapter_test.sh`, `mock_backend.py`, `test_integration.py` needs Chromium).
