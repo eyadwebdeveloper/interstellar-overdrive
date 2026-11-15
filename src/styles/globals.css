@@ -69,7 +69,7 @@
   --sc-transition-slow: 400ms ease;
 
   /* ── Typography ── */
-  --sc-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sc-font-sans: 'Kumbh Sans Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --sc-font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
 
   /* ── Sidebar ── */
@@ -88,7 +88,7 @@
 }
 
 html {
-  font-size: 16px;
+  font-size: 1.0625rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

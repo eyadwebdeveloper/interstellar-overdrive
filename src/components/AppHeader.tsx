@@ -50,7 +50,7 @@ export default function AppHeader({ showLogo = true, title }: HeaderProps) {
           >
             <Bell size={18} />
             {unacknowledged > 0 && (
-              <span className="aura-badge" style={{ position: 'absolute', top: -2, right: -2, minWidth: 16, height: 16, fontSize: 10 }}>
+              <span className="aura-badge" style={{ position: 'absolute', top: -2, right: -2, minWidth: 18, height: 18, fontSize: 12 }}>
                 {unacknowledged}
               </span>
             )}

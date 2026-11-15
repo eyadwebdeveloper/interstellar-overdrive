@@ -2,7 +2,7 @@
 
 ## Apply
 1. Copy `src/` from this folder over the repo. Delete `src/App.css`, `src/index.css`, `src/assets/hero.png`, `src/assets/react.svg` (unused).
-2. `npm i @fontsource-variable/bricolage-grotesque @fontsource/atkinson-hyperlegible`
+2. `npm i @fontsource-variable/bricolage-grotesque @fontsource-variable/kumbh-sans`
 3. Do NOT import `styles/globals.css` or `styles/animations.css`. `styles/stowage.css` is the design system; it aliases the old `--sc-*` variables so existing utils keep working.
 4. `tsc -b` and `vite build` pass on this state. Done so far: design system, shell, Today, Body lab (Human-Atlas 3D anatomy models — male / female / leg muscles with a switcher; replaces the old procedural figure).
 

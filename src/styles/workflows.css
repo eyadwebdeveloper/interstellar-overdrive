@@ -21,7 +21,7 @@
     --radius-control: 13px;
     --display:
       "Bricolage Grotesque Variable", "Bricolage Grotesque", sans-serif;
-    --ui: "Atkinson Hyperlegible", system-ui, sans-serif;
+    --ui: "Kumbh Sans Variable", system-ui, sans-serif;
   }
 
   .page.workflow-page {
@@ -68,7 +68,7 @@
     max-width: 620px;
     margin-top: 12px;
     color: var(--ink-soft);
-    font-size: 16px;
+    font-size: 1.0625rem;
   }
   .heading-actions {
     flex: none;
@@ -76,7 +76,7 @@
   }
   .eyebrow {
     color: var(--forest);
-    font-size: 11px;
+    font-size: 0.8125rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     line-height: 1.3;
@@ -87,7 +87,7 @@
     color: var(--ink-soft);
   }
   .small-text {
-    font-size: 13px;
+    font-size: 0.9375rem;
   }
   .row {
     display: flex;
@@ -122,13 +122,13 @@
     margin-bottom: 18px;
   }
   .panel-heading h2 {
-    font-size: 21px;
+    font-size: 1.3125rem;
     letter-spacing: -0.025em;
   }
   .panel-heading p {
     margin-top: 4px;
     color: var(--ink-soft);
-    font-size: 14px;
+    font-size: 0.9688rem;
   }
   .quiet-panel {
     background: transparent;
@@ -145,7 +145,7 @@
     border-radius: var(--radius-control);
     padding: 10px 16px;
     font-weight: 800;
-    font-size: 14px;
+    font-size: 0.9688rem;
     text-decoration: none;
     transition:
       background 0.18s ease,
@@ -187,7 +187,7 @@
   .button.small {
     min-height: 34px;
     padding: 7px 11px;
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .icon-button {
     display: inline-grid;
@@ -228,7 +228,7 @@
   }
   .field-label {
     color: var(--ink-soft);
-    font-size: 13px;
+    font-size: 0.9375rem;
     font-weight: 800;
   }
   .field-label strong {
@@ -269,7 +269,7 @@
     padding: 5px 9px;
     background: var(--paper);
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 0.8125rem;
     font-weight: 800;
     white-space: nowrap;
   }
@@ -307,7 +307,7 @@
     border-radius: 15px;
     padding: 12px 14px;
     color: var(--ink-soft);
-    font-size: 13px;
+    font-size: 0.9375rem;
   }
   .notice-info {
     background: var(--mint-soft);
@@ -372,7 +372,7 @@
     display: flex;
     justify-content: space-between;
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 0.8125rem;
   }
   .dialog-backdrop {
     position: fixed;
@@ -401,7 +401,7 @@
     margin-bottom: 14px;
   }
   .dialog > header h2 {
-    font-size: 27px;
+    font-size: 1.6875rem;
   }
   .dialog .icon-button {
     flex: none;
@@ -472,11 +472,11 @@
     background: var(--mint-soft);
   }
   .choice-card strong {
-    font-size: 14px;
+    font-size: 0.9688rem;
   }
   .choice-card small {
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 0.8125rem;
     line-height: 1.3;
   }
   .choice-number {
@@ -506,18 +506,18 @@
   }
   .scale-value {
     color: var(--forest);
-    font-size: 18px;
+    font-size: 1.125rem;
     font-family: var(--display);
   }
   .scale-value span {
     color: var(--ink-soft);
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .scale-caption {
     display: flex;
     justify-content: space-between;
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 0.8125rem;
   }
   .field-grid {
     display: grid;
@@ -538,12 +538,12 @@
     border-radius: 11px;
     background: var(--danger-soft);
     color: var(--danger);
-    font-size: 13px;
+    font-size: 0.9375rem;
     font-weight: 700;
   }
   .form-hint {
     color: var(--ink-soft);
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .context-rail {
     display: flex;
@@ -559,7 +559,7 @@
   }
   .baseline-value span {
     color: var(--forest);
-    font: 700 34px var(--display);
+    font: 700 2.125rem var(--display);
     letter-spacing: -0.04em;
   }
   .baseline-value small {
@@ -570,7 +570,7 @@
     padding: 11px 0;
     border-bottom: 1px solid var(--line);
     color: var(--ink-soft);
-    font-size: 13px;
+    font-size: 0.9375rem;
   }
   .baseline-row strong {
     color: var(--forest);
@@ -607,12 +607,12 @@
     display: block;
   }
   .test-row strong {
-    font-size: 13px;
+    font-size: 0.9375rem;
   }
   .test-row small {
     margin-top: 2px;
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 0.8125rem;
   }
   .test-row > svg {
     flex: none;
@@ -642,7 +642,7 @@
     gap: 18px;
     padding: 13px 0;
     border-bottom: 1px solid var(--line);
-    font-size: 13px;
+    font-size: 0.9375rem;
   }
   .review-list span {
     color: var(--ink-soft);
@@ -687,7 +687,7 @@
     background: var(--mint-soft);
   }
   .summary-grid strong {
-    font-size: 15px;
+    font-size: 1.0312rem;
   }
   .checkin-footer-note {
     display: flex;
@@ -695,7 +695,7 @@
     gap: 7px;
     margin-top: 18px;
     color: var(--ink-soft);
-    font-size: 12px;
+    font-size: 0.875rem;
   }
 
   /* Exercise */
@@ -744,7 +744,7 @@
     gap: 6px;
     padding: 10px 0;
     color: rgba(247, 248, 243, 0.78);
-    font-size: 13px;
+    font-size: 0.9375rem;
   }
   .hero-aside {
     display: grid;
@@ -754,7 +754,7 @@
     border-left: 1px solid rgba(193, 235, 201, 0.24);
   }
   .hero-aside strong {
-    font-size: 40px;
+    font-size: 2.5rem;
     line-height: 1;
   }
   .session-list,
@@ -796,14 +796,14 @@
   .session-copy span,
   .history-row > div span {
     color: var(--ink-soft);
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .chart-caption {
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
     color: var(--ink-soft);
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .chart-caption strong {
     color: var(--forest);
@@ -824,15 +824,15 @@
   }
   .week-day > span {
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 0.8125rem;
     font-weight: 800;
   }
   .week-day strong {
-    font-size: 13px;
+    font-size: 0.9375rem;
   }
   .week-day small {
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 0.8125rem;
     line-height: 1.3;
   }
   .week-day.forest {
@@ -858,11 +858,11 @@
     border-top: 2px solid var(--forest);
   }
   .plan-summary strong {
-    font: 700 25px var(--display);
+    font: 700 1.5625rem var(--display);
   }
   .plan-summary span {
     color: var(--ink-soft);
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .device-list {
     grid-template-columns: 1fr 1fr;
@@ -889,11 +889,11 @@
     min-width: 0;
   }
   .device-card strong {
-    font-size: 13px;
+    font-size: 0.9375rem;
   }
   .device-card small {
     color: var(--ink-soft);
-    font-size: 10px;
+    font-size: 0.8125rem;
   }
   .device-card > svg {
     color: var(--forest);
@@ -908,12 +908,12 @@
   }
   .device-detail strong {
     color: var(--mint);
-    font-size: 14px;
+    font-size: 0.9688rem;
   }
   .device-detail p,
   .device-detail .eyebrow {
     color: rgba(247, 248, 243, 0.72);
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .readiness-block {
     display: flex;
@@ -930,7 +930,7 @@
     border-right-color: var(--forest);
     border-radius: 50%;
     color: var(--forest);
-    font: 700 13px var(--display);
+    font: 700 0.9375rem var(--display);
   }
   .empty-history {
     display: grid;
@@ -946,7 +946,7 @@
   .history-date {
     min-width: 54px;
     color: var(--forest);
-    font-size: 12px;
+    font-size: 0.875rem;
     font-weight: 800;
   }
   .history-note {
@@ -975,10 +975,10 @@
   .live-grid span,
   .result-grid span {
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 0.8125rem;
   }
   .runner-stats strong {
-    font: 700 23px var(--display);
+    font: 700 1.4375rem var(--display);
   }
   .runner-controls {
     display: flex;
@@ -1017,7 +1017,7 @@
   }
   .set-row small {
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 0.8125rem;
   }
   .set-row > svg {
     color: var(--success);
@@ -1046,7 +1046,7 @@
     margin-bottom: 34px;
   }
   .back-link {
-    font-size: 13px;
+    font-size: 0.9375rem;
   }
   .focus-heading {
     margin-bottom: 24px;
@@ -1074,7 +1074,7 @@
   }
   .pvt-stage-top strong {
     color: var(--forest);
-    font: 700 23px var(--display);
+    font: 700 1.4375rem var(--display);
     font-variant-numeric: tabular-nums;
   }
   .pvt-instruction {
@@ -1145,10 +1145,10 @@
     cursor: default;
   }
   .countdown-pad span {
-    font-size: 14px;
+    font-size: 0.9688rem;
   }
   .countdown-pad strong {
-    font: 700 92px var(--display);
+    font: 700 5.75rem var(--display);
     line-height: 1;
   }
   .pvt-stage-footer {
@@ -1156,12 +1156,12 @@
     align-items: center;
     justify-content: space-between;
     color: var(--ink-soft);
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .keyboard-note {
     margin: 10px 2px 0;
     color: var(--ink-soft);
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .pvt-lower {
     display: grid;
@@ -1183,7 +1183,7 @@
     background: var(--mint-soft);
   }
   .live-grid strong {
-    font: 700 21px var(--display);
+    font: 700 1.3125rem var(--display);
   }
   .pvt-result {
     display: grid;
@@ -1197,12 +1197,12 @@
     grid-template-columns: repeat(4, 1fr);
   }
   .result-grid strong {
-    font: 700 23px var(--display);
+    font: 700 1.4375rem var(--display);
   }
   .result-grid small {
     margin-left: 2px;
     color: var(--ink-soft);
-    font: 400 11px var(--ui);
+    font: 400 0.8125rem var(--ui);
   }
   .pvt-history {
     display: grid;
@@ -1216,7 +1216,7 @@
     padding: 11px 0;
     border-bottom: 1px solid var(--line);
     color: var(--ink-soft);
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .pvt-history-row strong {
     color: var(--forest);
@@ -1235,12 +1235,12 @@
   }
   .demo-baseline strong {
     color: var(--forest);
-    font: 700 18px var(--display);
+    font: 700 1.125rem var(--display);
   }
   .focus-footnote {
     margin-top: 18px;
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 0.8125rem;
     text-align: center;
   }
   .focus-footnote code {
@@ -1298,7 +1298,7 @@
       border-left: 0;
     }
     .hero-aside strong {
-      font-size: 28px;
+      font-size: 1.75rem;
     }
     .pvt-pad {
       min-height: 240px;
@@ -1309,7 +1309,7 @@
       padding-inline: 14px;
     }
     .workflow-page h1 {
-      font-size: 38px;
+      font-size: 2.375rem;
     }
     .choice-grid,
     .choice-grid.three,
@@ -1363,29 +1363,29 @@
     min-height: 0;
   }
   .page-heading h1 {
-    font-size: 37px;
+    font-size: 2.3125rem;
     line-height: 1.12;
     font-weight: 500;
     letter-spacing: -0.04em;
   }
   .page-heading p {
-    font-size: 12px;
+    font-size: 0.875rem;
     margin-top: 10px;
   }
   .page-heading .eyebrow {
-    font-size: 9px;
+    font-size: 0.8125rem;
   }
   .page-heading {
     padding-bottom: 0;
   }
   @media (max-width: 1200px) {
     .page-heading h1 {
-      font-size: 33px;
+      font-size: 2.0625rem;
     }
   }
   @media (max-width: 600px) {
     .page-heading h1 {
-      font-size: 32px;
+      font-size: 2rem;
     }
     .page-heading {
       display: flex;

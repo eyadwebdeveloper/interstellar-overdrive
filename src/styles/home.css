@@ -29,17 +29,17 @@
 }
 .hero-copy .eyebrow {
   color: #5a7f60;
-  font-size: 8px;
+  font-size: 0.8125rem;
 }
 .hero-copy h2 {
-  font-size: 33px;
+  font-size: 2.0625rem;
   line-height: 1.1;
   font-weight: 500;
   color: #214b36;
   letter-spacing: -0.04em;
 }
 .hero-copy p {
-  font-size: 11px;
+  font-size: 0.8125rem;
   line-height: 1.7;
   color: #597b5d;
   max-width: 290px;
@@ -47,7 +47,7 @@
 }
 .hero-copy .button {
   margin-top: 22px;
-  font-size: 10px;
+  font-size: 0.8125rem;
   padding: 10px 13px;
   min-height: 34px;
 }
@@ -74,15 +74,15 @@
   gap: 5px;
 }
 .hero-orbit strong {
-  font: 500 52px/1 var(--display);
+  font: 500 3.25rem/1 var(--display);
   letter-spacing: -0.04em;
 }
 .hero-orbit strong span {
-  font-size: 24px;
+  font-size: 1.5rem;
   color: #749d77;
 }
 .hero-orbit small {
-  font-size: 7px;
+  font-size: 0.8125rem;
   letter-spacing: 0.13em;
   margin-top: 3px;
 }
@@ -108,7 +108,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 10px;
+  font-size: 0.8125rem;
   color: var(--muted);
   white-space: nowrap;
 }
@@ -119,26 +119,26 @@
   display: flex;
   align-items: baseline;
   gap: 4px;
-  font: 500 28px var(--display);
+  font: 500 1.75rem var(--display);
   letter-spacing: -0.03em;
   margin-top: 10px;
   white-space: nowrap;
 }
 .snapshot-value > span:not(.delta) {
-  font: 400 10px var(--body);
+  font: 400 0.8125rem var(--body);
   color: var(--muted);
   letter-spacing: 0;
   margin-right: 3px;
 }
 .snapshot-value .delta {
-  font: 400 9px var(--body);
+  font: 400 0.8125rem var(--body);
   letter-spacing: 0;
 }
 .snapshot-status {
   margin-top: 7px;
 }
 .snapshot-status .badge {
-  font-size: 8px;
+  font-size: 0.8125rem;
 }
 .heart-chart-panel {
   padding-bottom: 17px;
@@ -153,7 +153,7 @@
 }
 .mini-segment > button {
   padding: 4px 7px;
-  font-size: 9px;
+  font-size: 0.8125rem;
   border-radius: 4px;
   color: var(--muted);
   white-space: nowrap;
@@ -176,11 +176,11 @@
   gap: 2px;
 }
 .chart-summary strong {
-  font: 500 32px/1.2 var(--display);
+  font: 500 2rem/1.2 var(--display);
   letter-spacing: -0.04em;
 }
 .chart-summary strong > span {
-  font: 400 11px var(--body);
+  font: 400 0.8125rem var(--body);
   margin-left: 6px;
   letter-spacing: 0;
   color: var(--muted);
@@ -190,7 +190,7 @@
   align-items: center;
   gap: 6px;
   color: var(--muted);
-  font-size: 9px;
+  font-size: 0.8125rem;
 }
 .baseline-key i {
   width: 7px;
@@ -199,14 +199,14 @@
   border-radius: 2px;
 }
 .chart-summary .small-text {
-  font-size: 9px;
+  font-size: 0.8125rem;
 }
 .chart-footnote {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-top: 19px;
-  font-size: 9px;
+  font-size: 0.8125rem;
   color: #8a978d;
 }
 .chart-footnote > span {
@@ -234,11 +234,11 @@
   flex: none;
 }
 .attention-inline strong {
-  font-size: 12px;
+  font-size: 0.875rem;
   color: #745830;
 }
 .attention-inline p {
-  font-size: 10px;
+  font-size: 0.8125rem;
   color: #9a825c;
   line-height: 1.6;
   max-width: 420px;
@@ -276,11 +276,11 @@
   color: #6d8f70;
 }
 .system-overview strong {
-  font-size: 12px;
+  font-size: 0.875rem;
   display: block;
 }
 .system-overview span:not(.system-mini-icon) {
-  font-size: 10px;
+  font-size: 0.8125rem;
   color: var(--muted);
   display: block;
   margin-top: 2px;
@@ -295,10 +295,10 @@
   padding: 22px 22px 20px;
 }
 .today-panel .panel-heading h2 {
-  font-size: 17px;
+  font-size: 1.0625rem;
 }
 .today-panel .panel-heading p {
-  font-size: 10px;
+  font-size: 0.8125rem;
 }
 .tiny-calendar {
   height: 31px;
@@ -354,17 +354,17 @@
   padding-top: 2px;
 }
 .timeline-item time {
-  font-size: 9px;
+  font-size: 0.8125rem;
   color: #8c998e;
   display: block;
 }
 .timeline-item strong {
-  font-size: 12px;
+  font-size: 0.875rem;
   display: block;
   margin-top: 4px;
 }
 .timeline-item small {
-  font-size: 9px;
+  font-size: 0.8125rem;
   color: #88968b;
   display: block;
   margin-top: 3px;
@@ -378,7 +378,7 @@
   color: #7b8b7d;
 }
 .today-panel > .button {
-  font-size: 11px;
+  font-size: 0.8125rem;
   min-height: 39px;
 }
 .care-team-panel {
@@ -397,17 +397,17 @@
 .care-team-top .badge {
   background: transparent;
   letter-spacing: 0.07em;
-  font-size: 7px;
+  font-size: 0.8125rem;
   padding: 0;
 }
 .care-team-panel h2 {
-  font-size: 23px;
+  font-size: 1.4375rem;
   line-height: 1.2;
   color: #35553a;
   font-weight: 500;
 }
 .care-team-panel > p {
-  font-size: 10px;
+  font-size: 0.8125rem;
   color: #819179;
   line-height: 1.6;
   margin-top: 10px;
@@ -429,12 +429,12 @@
   display: block;
 }
 .care-contact strong {
-  font-size: 11px;
+  font-size: 0.8125rem;
   font-weight: 700;
   color: #4d6a4e;
 }
 .care-contact span:not(.avatar) {
-  font-size: 9px;
+  font-size: 0.8125rem;
   color: #88997d;
   margin-top: 2px;
 }
@@ -443,7 +443,7 @@
   border-color: #fff;
   width: 34px;
   height: 34px;
-  font-size: 9px;
+  font-size: 0.8125rem;
 }
 .care-contact .earth-avatar {
   background: #dbe6e3;
@@ -455,13 +455,13 @@
 .care-team-panel > .button {
   margin-top: 22px;
   background: #fff9;
-  font-size: 11px;
+  font-size: 0.8125rem;
   border-color: #d7e0cd;
   color: #557653;
   min-height: 36px;
 }
 .care-disclaimer {
-  font-size: 8px;
+  font-size: 0.8125rem;
   color: #8e9b83;
   text-align: center;
   display: block;
@@ -477,18 +477,18 @@
   display: flex;
   gap: 6px;
   align-items: center;
-  font-size: 8px;
+  font-size: 0.8125rem;
   color: #668969;
 }
 .learn-strip h3 {
-  font-size: 23px;
+  font-size: 1.4375rem;
   line-height: 1.25;
   font-weight: 500;
   color: #2e4f3a;
   margin-top: 10px;
 }
 .learn-strip > p {
-  font-size: 10px;
+  font-size: 0.8125rem;
   line-height: 1.6;
   color: #819179;
   margin-top: 8px;
@@ -519,7 +519,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 11.5px;
+  font-size: 0.8438rem;
   font-weight: 700;
   color: #3d5f43;
 }
@@ -528,7 +528,7 @@
   flex-shrink: 0;
 }
 .learn-strip-links a span {
-  font-size: 9px;
+  font-size: 0.8125rem;
   color: #7f9377;
 }
 .learn-strip-footer {
@@ -536,7 +536,7 @@
   align-items: center;
   gap: 6px;
   margin-top: 14px;
-  font-size: 10px;
+  font-size: 0.8125rem;
   font-weight: 700;
   color: #557653;
 }
@@ -551,18 +551,18 @@
   display: flex;
   gap: 6px;
   align-items: center;
-  font-size: 8px;
+  font-size: 0.8125rem;
   color: #a0ac93;
   margin-bottom: 13px;
 }
 .quiet-tip h3 {
-  font-size: 23px;
+  font-size: 1.4375rem;
   line-height: 1.25;
   font-weight: 500;
   color: #62785b;
 }
 .quiet-tip p {
-  font-size: 10px;
+  font-size: 0.8125rem;
   line-height: 1.7;
   margin-top: 12px;
   color: #8c9983;
@@ -572,7 +572,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 9px;
+  font-size: 0.8125rem;
   color: #93a28a;
   margin-top: 19px;
 }
@@ -582,7 +582,7 @@
     gap: 28px;
   }
   .hero-copy h2 {
-    font-size: 43px;
+    font-size: 2.6875rem;
   }
   .wellbeing-hero {
     padding: 38px;
@@ -608,36 +608,36 @@
     padding: 26px 22px;
   }
   .hero-copy h2 {
-    font-size: 28px;
+    font-size: 1.75rem;
   }
   .hero-copy p {
-    font-size: 10px;
+    font-size: 0.8125rem;
   }
   .hero-orbit {
     width: 140px;
     height: 140px;
   }
   .hero-orbit strong {
-    font-size: 39px;
+    font-size: 2.4375rem;
   }
   .hero-orbit strong span {
-    font-size: 20px;
+    font-size: 1.25rem;
   }
   .hero-orbit small {
-    font-size: 6px;
+    font-size: 0.8125rem;
   }
   .snapshot {
     padding: 16px 12px;
   }
   .snapshot-label {
-    font-size: 9px;
+    font-size: 0.8125rem;
     gap: 5px;
   }
   .snapshot-label svg {
     width: 14px;
   }
   .snapshot-value {
-    font-size: 24px;
+    font-size: 1.5rem;
     flex-wrap: wrap;
   }
   .home-main,
@@ -651,10 +651,10 @@
     padding: 20px;
   }
   .baseline-key {
-    font-size: 8px;
+    font-size: 0.8125rem;
   }
   .hero-copy .eyebrow {
-    font-size: 7px;
+    font-size: 0.8125rem;
   }
 }
 @media (max-width: 1060px) and (min-width: 901px) {
@@ -670,17 +670,17 @@
     grid-column: 2;
   }
   .hero-copy h2 {
-    font-size: 35px;
+    font-size: 2.1875rem;
   }
   .hero-orbit {
     width: 180px;
     height: 180px;
   }
   .snapshot-value {
-    font-size: 28px;
+    font-size: 1.75rem;
   }
   .snapshot-label {
-    font-size: 11px;
+    font-size: 0.8125rem;
   }
 }
 @media (max-width: 760px) {
@@ -700,19 +700,19 @@
     height: 185px;
   }
   .hero-copy h2 {
-    font-size: 35px;
+    font-size: 2.1875rem;
   }
   .hero-copy p {
-    font-size: 11px;
+    font-size: 0.8125rem;
   }
   .hero-orbit strong {
-    font-size: 48px;
+    font-size: 3rem;
   }
   .snapshot-label {
-    font-size: 10px;
+    font-size: 0.8125rem;
   }
   .snapshot-value {
-    font-size: 28px;
+    font-size: 1.75rem;
   }
 }
 @media (max-width: 600px) {
@@ -732,20 +732,20 @@
     max-width: 230px;
   }
   .hero-copy h2 {
-    font-size: 30px;
+    font-size: 1.875rem;
   }
   .hero-copy .eyebrow {
-    font-size: 7px;
+    font-size: 0.8125rem;
     max-width: 165px;
   }
   .hero-copy p {
-    font-size: 10px;
+    font-size: 0.8125rem;
     max-width: 215px;
     margin-top: 12px;
   }
   .hero-copy .button {
     margin-top: 20px;
-    font-size: 10px;
+    font-size: 0.8125rem;
   }
   .hero-orbit {
     width: 138px;
@@ -756,13 +756,13 @@
     opacity: 0.8;
   }
   .hero-orbit strong {
-    font-size: 38px;
+    font-size: 2.375rem;
   }
   .hero-orbit strong span {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
   .hero-orbit small {
-    font-size: 6px;
+    font-size: 0.8125rem;
   }
   .hero-orbit > div > svg {
     width: 18px;
@@ -775,7 +775,7 @@
     padding: 14px 11px;
   }
   .snapshot-label {
-    font-size: 8px;
+    font-size: 0.8125rem;
     white-space: normal;
     line-height: 1.3;
     gap: 5px;
@@ -787,17 +787,17 @@
     height: 13px;
   }
   .snapshot-value {
-    font-size: 24px;
+    font-size: 1.5rem;
     gap: 3px;
   }
   .snapshot-value > span:not(.delta) {
-    font-size: 8px;
+    font-size: 0.8125rem;
   }
   .snapshot-value .delta {
     display: none;
   }
   .snapshot-status .badge {
-    font-size: 7px;
+    font-size: 0.8125rem;
     padding: 3px 4px;
     white-space: normal;
   }
@@ -824,19 +824,19 @@
     align-items: flex-end;
   }
   .chart-summary strong {
-    font-size: 31px;
+    font-size: 1.9375rem;
   }
   .baseline-key {
-    font-size: 8px;
+    font-size: 0.8125rem;
     max-width: 110px;
     align-items: flex-start;
   }
   .chart-footnote {
-    font-size: 8px;
+    font-size: 0.8125rem;
     gap: 8px;
   }
   .chart-footnote .text-link {
-    font-size: 9px;
+    font-size: 0.8125rem;
   }
   .attention-inline {
     padding: 14px 12px;
@@ -849,23 +849,23 @@
     flex: 1;
   }
   .attention-inline strong {
-    font-size: 11px;
+    font-size: 0.8125rem;
   }
   .attention-inline p {
-    font-size: 9px;
+    font-size: 0.8125rem;
   }
   .attention-inline > .button {
     margin-left: 48px;
     margin-top: 0;
     min-height: 30px;
-    font-size: 10px;
+    font-size: 0.8125rem;
   }
   .attention-icon {
     width: 35px;
     height: 35px;
   }
   .system-overview strong {
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .today-panel {
     padding: 22px;
@@ -887,42 +887,42 @@
     display: none;
   }
   .timeline-item strong {
-    font-size: 11px;
+    font-size: 0.8125rem;
   }
   .timeline-item small {
-    font-size: 9px;
+    font-size: 0.8125rem;
   }
   .timeline-marker {
     height: 24px;
     width: 24px;
   }
   .care-team-panel h2 {
-    font-size: 27px;
+    font-size: 1.6875rem;
   }
   .care-team-panel {
     padding: 24px;
   }
   .care-team-panel > p {
-    font-size: 11px;
+    font-size: 0.8125rem;
   }
   .care-contact strong {
-    font-size: 12px;
+    font-size: 0.875rem;
   }
   .care-contact span:not(.avatar) {
-    font-size: 10px;
+    font-size: 0.8125rem;
   }
   .quiet-tip {
     padding: 12px 7px;
   }
   .quiet-tip h3 {
-    font-size: 26px;
+    font-size: 1.625rem;
   }
   .quiet-tip p {
-    font-size: 11px;
+    font-size: 0.8125rem;
     max-width: 300px;
   }
   .quiet-tip > div:last-child {
-    font-size: 10px;
+    font-size: 0.8125rem;
   }
   .system-overview .system-mini-icon {
     height: 35px;
@@ -931,10 +931,10 @@
 }
 @media (max-width: 360px) {
   .snapshot-value {
-    font-size: 21px;
+    font-size: 1.3125rem;
   }
   .hero-copy h2 {
-    font-size: 27px;
+    font-size: 1.6875rem;
   }
   .hero-orbit {
     right: -38px;
@@ -954,12 +954,12 @@
     gap: 5px;
   }
   .snapshot-label {
-    font-size: 10px;
+    font-size: 0.8125rem;
     min-height: 0;
   }
   .snapshot-value {
     margin: 0;
-    font-size: 23px;
+    font-size: 1.4375rem;
   }
   .snapshot-status {
     display: none;

@@ -364,9 +364,11 @@ export async function askLive(
 /** Types an on-device answer out so it reads like a live response. */
 export async function typeOut(text: string, onDelta: (t: string) => void, signal: AbortSignal, fast = false) {
   const parts = text.match(/\S+\s*/g) ?? [text];
-  for (const part of parts) {
+  // Aim for about two seconds however long the answer is, so long answers never drag.
+  const delay = fast ? 0 : Math.min(26, Math.max(6, 2000 / parts.length));
+  for (let i = 0; i < parts.length; i++) {
     if (signal.aborted) return;
-    onDelta(part);
-    await new Promise((r) => window.setTimeout(r, fast ? 0 : 14 + Math.random() * 22));
+    onDelta(parts[i]);
+    await new Promise((r) => window.setTimeout(r, delay * (0.7 + Math.random() * 0.6)));
   }
 }

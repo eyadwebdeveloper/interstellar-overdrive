@@ -26,7 +26,7 @@
     margin: 0 auto;
     padding: clamp(24px, 4vw, 56px) clamp(18px, 4vw, 64px) 48px;
     color: var(--ink);
-    font-family: "Atkinson Hyperlegible", system-ui, sans-serif;
+    font-family: "Kumbh Sans Variable", system-ui, sans-serif;
   }
   .health-page *,
   .health-page *::before,
@@ -38,11 +38,11 @@
   .health-page h3 {
     color: var(--ink);
     font-family:
-      "Bricolage Grotesque Variable", "Atkinson Hyperlegible", sans-serif;
+      "Bricolage Grotesque Variable", "Kumbh Sans Variable", sans-serif;
   }
   .health-page h1 {
     margin: 0;
-    font-size: clamp(2.15rem, 4vw, 4.1rem);
+    font-size: clamp(2.15rem, 4vw, 3.5rem);
     line-height: 0.98;
     letter-spacing: -0.055em;
   }
@@ -101,7 +101,7 @@
   .eyebrow {
     margin-bottom: 10px;
     color: var(--forest-2);
-    font-size: 0.72rem;
+    font-size: 0.8125rem;
     font-weight: 800;
     letter-spacing: 0.16em;
     line-height: 1.2;
@@ -112,7 +112,7 @@
     color: var(--ink-soft);
   }
   .small-text {
-    font-size: 0.82rem;
+    font-size: 0.89rem;
     line-height: 1.4;
   }
 
@@ -158,7 +158,7 @@
   .panel-heading p {
     margin-top: 5px;
     color: var(--ink-soft);
-    font-size: 0.88rem;
+    font-size: 0.95rem;
   }
   .panel > :not(.panel-heading) {
     margin-inline: 22px;
@@ -208,7 +208,7 @@
     min-height: 34px;
     padding: 7px 11px;
     border-radius: 10px;
-    font-size: 0.86rem;
+    font-size: 0.93rem;
   }
   .icon-button {
     display: inline-grid;
@@ -230,7 +230,7 @@
     border-radius: 999px;
     background: var(--mint-soft);
     color: var(--forest-2);
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     font-weight: 800;
     line-height: 1;
   }
@@ -285,7 +285,7 @@
   }
   .field-label {
     color: var(--ink-soft);
-    font-size: 0.77rem;
+    font-size: 0.84rem;
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
@@ -334,7 +334,7 @@
     border-radius: 999px;
     background: transparent;
     color: var(--ink-soft);
-    font-size: 0.84rem;
+    font-size: 0.91rem;
     font-weight: 800;
   }
   .health-filter[aria-pressed="true"] {
@@ -370,7 +370,7 @@
   }
   .chart-title span {
     color: var(--ink-soft);
-    font-size: 0.82rem;
+    font-size: 0.89rem;
   }
   .chart-meta {
     display: flex;
@@ -378,7 +378,7 @@
     flex-wrap: wrap;
     padding: 12px 22px 0;
     color: var(--ink-soft);
-    font-size: 0.78rem;
+    font-size: 0.85rem;
   }
   .chart-meta b {
     color: var(--ink);
@@ -402,7 +402,7 @@
     gap: 10px;
     margin-top: 6px;
     color: var(--ink-soft);
-    font-size: 0.72rem;
+    font-size: 0.8125rem;
   }
 
   .health-snapshot {
@@ -439,7 +439,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 0.88rem;
+    font-size: 0.95rem;
   }
   .snapshot-list li {
     display: flex;
@@ -487,7 +487,7 @@
   .metric-label {
     margin-top: 14px;
     color: var(--ink-soft);
-    font-size: 0.82rem;
+    font-size: 0.89rem;
     font-weight: 800;
   }
   .metric-value {
@@ -502,15 +502,15 @@
   }
   .metric-value small {
     color: var(--ink-soft);
-    font-family: "Atkinson Hyperlegible", sans-serif;
-    font-size: 0.8rem;
+    font-family: "Kumbh Sans Variable", sans-serif;
+    font-size: 0.87rem;
     font-weight: 700;
     letter-spacing: 0;
   }
   .metric-baseline {
     margin-top: 7px;
     color: var(--ink-soft);
-    font-size: 0.76rem;
+    font-size: 0.83rem;
   }
   .metric-footer {
     display: flex;
@@ -524,7 +524,7 @@
     align-items: center;
     gap: 3px;
     color: var(--forest-2);
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     font-weight: 800;
   }
   .delta.down {
@@ -532,7 +532,7 @@
   }
   .metric-updated {
     color: var(--ink-soft);
-    font-size: 0.72rem;
+    font-size: 0.8125rem;
   }
 
   .health-section {
@@ -599,7 +599,7 @@
   }
   .system-card p {
     color: var(--ink-soft);
-    font-size: 0.84rem;
+    font-size: 0.91rem;
     line-height: 1.4;
   }
 
@@ -611,7 +611,7 @@
     border-radius: 14px;
     background: var(--mint-soft);
     color: var(--ink);
-    font-size: 0.86rem;
+    font-size: 0.93rem;
     line-height: 1.4;
   }
   .notice-warning {
@@ -669,8 +669,8 @@
   }
   .dialog-value small {
     color: var(--ink-soft);
-    font-family: "Atkinson Hyperlegible", sans-serif;
-    font-size: 0.95rem;
+    font-family: "Kumbh Sans Variable", sans-serif;
+    font-size: 0.98rem;
     letter-spacing: 0;
   }
 
@@ -724,7 +724,7 @@
   .model-empty p {
     margin-top: 7px;
     color: var(--ink-soft);
-    font-size: 0.87rem;
+    font-size: 0.94rem;
     line-height: 1.45;
   }
   .model-empty .button {
@@ -745,14 +745,14 @@
     padding: 6px 10px;
     border-radius: 999px;
     color: var(--forest);
-    font-size: 0.72rem;
+    font-size: 0.8125rem;
     font-weight: 800;
   }
   .atlas-hover {
     max-width: 220px;
     padding: 7px 10px;
     border-radius: 10px;
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     font-weight: 800;
     line-height: 1.3;
     transform: translate(14px, 14px);
@@ -761,7 +761,7 @@
     display: block;
     margin-top: 2px;
     color: var(--ink-soft);
-    font-size: 0.68rem;
+    font-size: 0.8125rem;
     font-weight: 700;
   }
   .model-asset-note {
@@ -773,7 +773,7 @@
     border-radius: 10px;
     background: rgba(247, 248, 243, 0.8);
     color: var(--ink-soft);
-    font-size: 0.72rem;
+    font-size: 0.8125rem;
     line-height: 1.3;
   }
   .model-system-links {
@@ -788,7 +788,7 @@
     border-radius: 8px;
     background: var(--mint-soft);
     color: var(--forest-2);
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     font-weight: 800;
   }
 
@@ -809,7 +809,7 @@
   }
   .body-context p {
     color: var(--ink-soft);
-    font-size: 0.9rem;
+    font-size: 0.97rem;
     line-height: 1.45;
   }
   .body-context-list {
@@ -826,7 +826,7 @@
     gap: 8px;
     padding: 10px 0;
     border-top: 1px solid var(--line);
-    font-size: 0.85rem;
+    font-size: 0.92rem;
     font-weight: 800;
   }
   .body-context-list span {
@@ -879,13 +879,13 @@
     margin-left: 2px;
   }
   .model-switch button span {
-    font-size: 0.84rem;
+    font-size: 0.91rem;
     font-weight: 800;
     line-height: 1.2;
   }
   .model-switch button small {
     color: var(--ink-soft);
-    font-size: 0.68rem;
+    font-size: 0.8125rem;
     font-weight: 700;
     line-height: 1.2;
   }
@@ -908,16 +908,16 @@
   }
   .model-credit p {
     margin: 6px 0 0;
-    font-size: 0.8rem;
+    font-size: 0.87rem;
   }
   .model-credit-name {
-    font-size: 0.82rem;
+    font-size: 0.89rem;
     font-weight: 800;
     color: var(--ink);
   }
   .model-credit-license {
     color: var(--ink-soft);
-    font-size: 0.72rem;
+    font-size: 0.8125rem;
   }
 
 
@@ -960,8 +960,8 @@
     display: block;
     margin-top: 4px;
     color: var(--ink-soft);
-    font-family: "Atkinson Hyperlegible", sans-serif;
-    font-size: 0.72rem;
+    font-family: "Kumbh Sans Variable", sans-serif;
+    font-size: 0.8125rem;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -977,7 +977,7 @@
     border-radius: 999px;
     background: var(--amber-soft);
     color: var(--amber);
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     font-weight: 800;
   }
   .action-list {
@@ -994,7 +994,7 @@
     border: 1px solid var(--line);
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.5);
-    font-size: 0.84rem;
+    font-size: 0.91rem;
     font-weight: 800;
   }
   .action-list a:hover {
@@ -1020,11 +1020,11 @@
   }
   .related-metric strong {
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.97rem;
   }
   .related-metric span {
     color: var(--ink-soft);
-    font-size: 0.76rem;
+    font-size: 0.83rem;
   }
   .related-metric b {
     font-family: "Bricolage Grotesque Variable", sans-serif;
@@ -1043,7 +1043,7 @@
   .demo-disclaimer {
     padding-top: 14px;
     color: var(--ink-soft);
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     line-height: 1.4;
   }
   .empty-state {
@@ -1130,29 +1130,29 @@
     min-height: 0;
   }
   .page-heading h1 {
-    font-size: 37px;
+    font-size: 2.3125rem;
     line-height: 1.12;
     font-weight: 500;
     letter-spacing: -0.04em;
   }
   .page-heading p {
-    font-size: 12px;
+    font-size: 0.875rem;
     margin-top: 10px;
   }
   .page-heading .eyebrow {
-    font-size: 9px;
+    font-size: 0.8125rem;
   }
   .page-heading {
     padding-bottom: 0;
   }
   @media (max-width: 1200px) {
     .page-heading h1 {
-      font-size: 33px;
+      font-size: 2.0625rem;
     }
   }
   @media (max-width: 600px) {
     .page-heading h1 {
-      font-size: 32px;
+      font-size: 2rem;
     }
     .page-heading {
       display: flex;
@@ -1179,7 +1179,7 @@
     height: 45px;
   }
   .metric-updated {
-    font-size: 10px;
+    font-size: 0.8125rem;
     max-width: 115px;
     text-align: right;
   }
@@ -1195,7 +1195,7 @@
     align-items: baseline;
   }
   .health-snapshot .snapshot-value small {
-    font-size: 14px;
+    font-size: 0.9688rem;
     font-weight: 400;
   }
 }

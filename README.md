@@ -1,91 +1,251 @@
-# AURA — AstroVitals
+<div align="center">
 
-A redesigned, local-first health workspace prototype for astronaut crews. The new interface uses a deep forest sidebar, warm paper surfaces, mint highlights, editorial typography, responsive layouts, focused task flows, gentle Framer Motion transitions and a built-in simple Three.js body figure. This is an interactive demonstration, not a connected clinical system.
+# AURA · AstroVitals
 
-## Run
+### A health workspace for crews who live far from Earth, with an AI that explains itself.
 
-Use Node.js 22.12+ (Node.js 24 recommended).
+An interactive, local-first prototype that pairs a **real 3D human-anatomy atlas** with an **on-device AI** (and an optional live Claude copilot) to turn a stream of vitals into plain-language understanding, honest forecasts and a clear next step.
+
+![React](https://img.shields.io/badge/React-19-149eca?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-WebGL-000000?logo=threedotjs&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-build-646cff?logo=vite&logoColor=white)
+![AI](https://img.shields.io/badge/AI-on--device%20%2B%20optional%20Claude-173c35)
+![Data](https://img.shields.io/badge/data-simulated%20demo-c98a2a)
+
+**[Quick start](#quick-start)** · **[What's inside](#whats-inside)** · **[The AI](#aura-intelligence--the-ai)** · **[The 3D atlas](#the-3d-atlas)** · **[Configuration](#configuration)** · **[Deploy](#deploying)** · **[Documentation PDF](docs/AURA-AstroVitals-Documentation.pdf)**
+
+</div>
+
+> **This is a demonstration, not a clinical system.** Every reading is simulated, nothing is transmitted, and the AI is advisory only. Do not enter real patient or astronaut data. See [Safety and honesty](#safety-and-honesty).
+
+---
+
+## Why it exists
+
+On a long mission a crew member can't pop down the road to a clinic, and the signals that matter (sleep, recovery, reaction time, radiation, fitness) drift slowly and quietly. AURA explores what a calm, trustworthy health companion could look like in that setting:
+
+- **Your own baseline is the reference**, not a population average.
+- **The AI shows its working.** Every finding names the numbers behind it, and every layer of the system is labelled for what it is.
+- **Rules and AI never blur.** Only transparent threshold rules can raise an official alert. The AI explains, forecasts and suggests; it never decides.
+- **The body is the interface.** Findings are pinned to real anatomy you can orbit, zoom and open.
+
+## Quick start
+
+Requires **Node.js 22.12+** (Node 24 recommended).
 
 ```bash
 npm ci
-npm run dev       # http://localhost:3000
-npm run build     # TypeScript checks + production output in dist/
-npm run preview   # Preview the production build
-npm run lint      # oxlint
+npm run dev        # http://localhost:3000
 ```
 
-The app uses hash routing, so it can run on static hosting without server-side route rewrites. Example: `http://localhost:3000/#/dashboard`.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Dev server on port 3000, including the local copilot API |
+| `npm run build` | Type-checks, then builds to `dist/` |
+| `npm run preview` | Serves the production build |
+| `npm run lint` | Runs oxlint |
 
-## Redesigned experiences
+The app uses hash routing, so it runs on any static host: `http://localhost:3000/#/intelligence`.
 
-The overview brings together personal signals, a baseline chart, daily tasks, official alert review, body-system context and care links. My Health includes metric detail dialogs, confidence/update metadata, seven- and fourteen-day demo views, hazard filters and system detail. Alerts separates transparent rule notices from advisory patterns and reminders. Check-in includes a four-step flow, crew-specific draft restoration, exact sleep hours/minutes and saved summaries. Exercise includes equipment context, timers, pause/resume, sets, RPE and completed/partial records. The focused three-minute PVT measures browser reaction time, handles early taps and ≥500 ms lapses, and cancels on interruption. Support saves clearly simulated notes locally. Medical Event is a validated multi-step documentation flow with review and JSON export.
+> **3D models:** the Human-Atlas files live in `public/models/` (about 70 MB across three sets). Keep that folder in place. Without it the app still works and shows a small built-in body instead of the atlas.
 
-Search opens with the header control or Ctrl/Cmd+K. The profile dialog switches crew members and controls reduced motion. Keyboard focus, dialog focus trapping, Escape, visible focus indicators and mobile navigation are included.
+### Turn on the live Claude copilot (optional)
 
-## Training room — health-concept games
+The copilot works fully offline with no setup. To have answers written by Claude instead:
 
-A "Training room" section (sidebar, search and the overview's context column) adds four short educational games that rehearse space-health concepts. Each game explains itself as it goes, keeps a best score per crew member in localStorage, and is reachable from `#/games`:
+```bash
+cp .env.example .env.local
+# edit .env.local and set ANTHROPIC_API_KEY=...
+npm run dev
+```
 
-- **Fuel the crew** (`#/games/fuel`) — match six rations to the body system that needs them: calcium/vitamin D for unloading bone, iron for red-cell shifts, sodium/potassium for fluid balance, protein for muscle, omega-3s and antioxidants for immune and cell protection. Every pairing explains why it works.
-- **Load bearing** (`#/games/load`) — plan twelve mission weeks of countermeasures on a tight budget of crew time across resistance, cardio and recovery. Bone, muscle, fitness and fatigue respond with different sensitivities; overtraining halves your gains, and mission events (cargo weeks, doubled EVAs, a solar particle event) bend the plan. The end summary compares your block against a no-countermeasures twin and quotes the real rates.
-- **Keep the clock** (`#/games/clock`) — build one orbital day from seven decisions on light, caffeine, training slot, meals, schedule pressure, evening light and the sleep window. A 24-hour dial fills with your choices, an alignment meter tracks rhythm points, and a projected melatonin curve shows what the day does to the night.
-- **Fact from fiction** (`#/games/facts`) — twelve myth-or-fact claims about the body in space (spinal elongation, fluid shift, SANS, ALARA, caffeine half-life, the sixteen-sunrise problem), each with the true explanation and a full review at the end.
+The badge in the copilot header changes from **On-device** to **Claude · live**. The key stays on the server and never reaches the browser.
 
-Game mechanics are illustrative and labelled as such inside the games; figures quoted in the summaries (about 1–1.5% bone loss per month without countermeasures, roughly two hours of daily exercise on orbit, caffeine's ~5-hour half-life, sixteen sunrises per day) reflect public space-life-science findings. Games use the same tokens, panels and buttons as the rest of the redesign, respect the reduced-motion setting, and store results through `src/stores/appStore.ts` alongside the other workflows.
+---
 
-## Body view — Human-Atlas anatomy models
+## What's inside
 
-The body view shows the real Human-Atlas 3D anatomy models (not a schematic figure): the male BodyParts3D body, the female Human Reference Atlas body, and the Visible Human Female leg-muscle set. All three are interchangeable in the Body view (`#/body`) through the segmented control above the viewport, and the dashboard's body tab and each system page carry the same atlas.
+| Area | Route | What you get |
+| --- | --- | --- |
+| **Overview** | `#/` | AI hero (readiness, drivers, patterns, ask box) beside the 3D atlas, daily tasks, alerts, care links |
+| **AURA Intelligence** | `#/intelligence` | How the AI reads you: readiness, next steps, the four layers, body findings, signal forecasts, patterns, what-if simulator |
+| **My health** | `#/dashboard` | Metric detail, baselines, 7/14-day views, hazard filters, confidence and source time |
+| **Body view** | `#/body` | The full atlas with angle, zoom, layer and AI-overlay controls |
+| **Alerts** | `#/alerts` | Official rule alerts, advisory AI patterns (each with *Explain with AURA*), reminders |
+| **Check-in & tests** | `#/checkin`, `#/pvt` | Four-step check-in; three-minute reaction-time test |
+| **Exercise** | `#/exercise` | Equipment context, timers, sets, RPE, completed/partial records |
+| **Training room** | `#/games` | Four short games: Fuel the crew, Load bearing, Keep the clock, Fact from fiction |
+| **Care** | `#/support`, `#/crew`, `#/medical-event` | Local support notes, crew directory, validated medical-event documentation with JSON export |
 
-The models stream as binary chunks (gzip, ~70 MB total across the three sets, loaded on demand per visible system), mount as zero-copy typed-array views, and render at a handful of draw calls while every one of the thousands of structures stays individually addressable. Interactions: drag to orbit, scroll or pinch to zoom, hover a structure for its name and system, tap a structure to bring its body system forward. The systems index beside the viewport lights the same region up on hover or keyboard focus.
+Press **Ctrl/Cmd + K** to search, **Ctrl/Cmd + J** (or **/**) to ask AURA from anywhere.
 
-`src/components/body/anatomyEngine.ts` holds the 3D engine; `src/components/body/AtlasBodyScene.tsx` maps the four workspace systems onto atlas systems; `src/lib/anatomy/` loads and lays out the model data. The geometry files live in `public/models/` (manifests plus `.bin.gz` chunks; the plain `.bin` twins of the original repository are not shipped — the runtime uses `DecompressionStream`, and browsers without it fall back to the systems index gracefully). Model data credits and licences: see `ATTRIBUTION.md`.
+![AURA Intelligence](docs/screenshots/intelligence-top.png)
 
+---
 
-## AURA Intelligence — the AI layer
+## AURA Intelligence — the AI
 
-The AI is front and centre on Overview (a dark "AURA Intelligence" hero with a live 3D body), in a floating **Ask AURA** copilot available on every page (`Ctrl/Cmd + J`, or `/`), and on its own page at `#/intelligence`.
+AURA's AI is built as four layers that are kept deliberately separate, so you always know what produced a statement.
 
-- **On-device engine** (`src/ai/engine.ts`): personal baselines (median + MAD of the first week), drift scores, 7-day forecasts with an empirical band, cross-signal patterns (sleep → reaction time, recovery debt), a readiness score with named drivers, ranked next steps, and a personal response model fitted on the person's own 14 days. Deterministic, offline, no network.
-- **Copilot** (`src/ai/copilot.ts`, `src/stores/copilotStore.ts`, `src/components/ai/`): grounded answers with "Based on" evidence chips and action buttons. Emergency wording is routed to official procedures, never answered clinically.
-- **Live Claude (optional)**: `api/copilot.ts` is a serverless function (Vercel). Set `ANTHROPIC_API_KEY` on the server and the copilot switches from "On-device" to "Claude · live", streaming answers grounded on the same compact readings JSON. The key never reaches the browser. See `.env.example`. With no key the app keeps working on the on-device engine.
-- **What-if simulator** (`#/intelligence#what-if`): change sleep and aerobic time and see projected readiness. Sleep effects are fitted from the person's own data; aerobic effects are a small, labelled assumption.
-- **Authority rule unchanged**: only Tier 0 rules create official alerts. Everything AI-made is labelled advisory and shows its evidence.
+```mermaid
+flowchart LR
+    V[Vitals<br/>14 days] --> T0[Tier 0 · Rules<br/>fixed thresholds]
+    V --> T1[Tier 1 · Patterns<br/>personal baselines]
+    V --> T2[Tier 2 · Forecast<br/>7-day outlook]
+    T0 -->|only layer that can| A[Official alerts]
+    T1 --> I[Insights + readiness]
+    T2 --> I
+    I --> C[Copilot<br/>explains, never decides]
+    C --> U[You]
+    I --> B[3D atlas callouts]
+```
 
-## 3D, always visible — the atlas, framed close
+![The four layers](docs/screenshots/pipeline.png)
 
-The Human-Atlas models are now the only 3D body used across the app: Overview (AI hero), the Intelligence page and the Body view. They open on a **dark observatory stage** (glass platform, tick ring, drifting dust, a slow scan sweep, floor glow and vignette) and start **close**: head to hips, instead of a distant full-body shot.
+### The on-device engine — `src/ai/engine.ts`
 
-- **Body view controls** (`#/body`): angle (front, 3/4, side, **back**), zoom presets (upper body, torso, head, legs, full body), layers (**See inside** hides the muscle layer so bones and organs read; **With muscle** shows everything) and an **AI findings** overlay.
-- **AI on the real anatomy:** callouts are pinned to the structures they concern (heart, brain, lymphatic nodes, skeleton), follow the camera, and open the matching system when tapped. Hovering a system in the index brings it forward.
-- **Overview and Intelligence** use a curated "see inside" layer set so only the chunks they need are downloaded.
-- `src/components/body/presets.ts` holds the framings, views and layers; `anatomyEngine.ts` gained `setFraming`, `projectSystem`, a dark stage theme and ambient effects.
-- `BodyTwin.tsx` (procedural body) is now only a safety net, used if the atlas files can't open (not installed on the host, or no WebGL2).
+Deterministic, offline, and cheap enough to run on every render. From the simulated 14-day series it produces:
 
+- **Personal baselines**: median and MAD of your first week, so "normal" means *your* normal.
+- **Drift scores and trends**: how many baseline-spreads each signal has moved in the worse direction, plus a least-squares slope.
+- **7-day forecasts** with an empirical uncertainty band that widens with the horizon, and "days until you leave your usual range".
+- **Cross-signal patterns**: for example *reaction time is following your sleep* (with the correlation) and *a recovery debt is building* (sleep, HRV and resting heart rate moving together).
+- **Readiness (0–100)** with named drivers, so the number is never a black box.
+- **A personal response model** fitted on your own sleep, reaction-time and HRV data, used by the what-if simulator.
 
-> Note: `public/models/` and the Python backend were not part of the delivered zip. Keep your `public/models/` folder in place. `_technical_support/ai-verification/make_fake_atlas.py` builds a tiny stand-in atlas used only for tests.
+![Signal forecasts](docs/screenshots/signals.png)
 
-## Persistence and simulation boundaries
+### The copilot — **Ask AURA**
 
-Crew-scoped check-ins, exercise records, PVT results, support notes and alert actions are stored in this browser's localStorage. Check-in drafts are also restored per crew member. Medical reports are separate recipient-labelled local queue entries and do not appear in Support's note list. Profile and motion preferences persist locally.
+Open it from the floating button, `Ctrl/Cmd + J`, or `/`. Every answer shows **"Based on"** chips with the exact readings used and action buttons that jump to the right screen. Emergency wording is never answered clinically: it points to official procedures and your Medical event page.
 
-Vital values, baselines, chart series, conditioning scores, mission details, rule thresholds and confidence percentages are illustrative demo data. Crew profiles share the demo vital dataset. The indicated Earth delay is simulated: nothing is sent, delivered or monitored. Advisory patterns come from the on-device AI engine (and the optional backend); they are not clinical output. No clinician availability or treatment approval is claimed.
+<p align="center"><img src="docs/screenshots/copilot.png" alt="Copilot conversation" width="380"></p>
 
-LocalStorage is not encrypted clinical storage. Do not enter real patient data. There is no server, authentication, telemetry feed, real communication link or clinical decision engine in this delivery.
+Two answer paths share one interface:
 
-## Source structure
+| Path | When | How |
+| --- | --- | --- |
+| **On-device** | Always available, works offline | `src/ai/copilot.ts` routes the question to a grounded answer built from the engine's findings |
+| **Claude · live** | When `ANTHROPIC_API_KEY` is set on the server | `api/copilot.ts` streams a Claude answer grounded on the same compact readings JSON |
 
-- `src/components/AppShell.tsx`: responsive navigation, global search, crew settings.
-- `src/components/ui/`: shared accessible primitives and charts.
-- `src/components/motion.tsx`: shared Framer Motion helpers; every animation is gated by the in-app reduce-motion preference and the OS setting.
-- `src/pages/`: the redesigned route screens.
-- `src/pages/GamesHub.tsx` and `src/pages/games/`: the training-room games (hub, Fuel, Load, Clock, Facts) plus shared parts.
-- `src/styles/games.css`: scoped training-room styles.
-- `src/data/gamesData.ts`: the games' educational content and tuning constants.
-- `src/components/body/`: the Human-Atlas 3D anatomy engine, the atlas scene, and the viewport container with error fallback.
-- `src/styles/design-system.css`: shared tokens/layout; page styles use CSS `@scope` to prevent cross-route collisions.
-- `src/stores/`: persistent crew, preference and workflow state.
-- `src/data/vitalsData.ts`: clearly simulated product data.
-- `_technical_support/redesign/`: implementation checks and diagnostic evidence.
+The serverless endpoint (`api/copilot.ts`):
 
-Use current Chrome, Edge, Safari or Firefox with CSS `@scope` support. The original uploaded app was kept separately; obsolete screens and styling are not part of this clean redesign.
+- `GET /api/copilot` returns `{ "configured": true | false }`, so the UI knows which mode to show.
+- `POST /api/copilot` takes `{ messages, context }` and streams plain text. Inputs are length-limited, only the last ten turns are sent, and the system prompt forbids diagnosis, invented numbers and alert creation.
+- Optional `COPILOT_ALLOWED_ORIGIN` restricts which origin may call it.
+- With no key, or on any error, the app silently falls back to the on-device engine.
+
+### What-if simulator
+
+Change next week's sleep and aerobic time and see projected readiness, reaction time, HRV and resting heart rate against "if nothing changes". The sleep effect is fitted from *your* data; the aerobic effect is a small, clearly labelled assumption.
+
+![What-if simulator](docs/screenshots/what-if.png)
+
+---
+
+## The 3D atlas
+
+The Body view shows real Human-Atlas anatomy, not a schematic figure: the male **BodyParts3D** body (2,234 structures), the female **Human Reference Atlas** body, and the **Visible Human Female** leg-muscle set. Models stream as gzip binary chunks on demand, mount as zero-copy typed arrays and render in a handful of draw calls while every structure stays individually addressable.
+
+- **Immersive stage**: a dark observatory with glass platform, tick ring, drifting dust, a slow scan sweep, floor glow and vignette (switched off by *Reduce motion*).
+- **Starts close**: head to hips, so organs and findings are readable immediately.
+- **Controls** (`#/body`): angle (front, 3/4, side, **back**), zoom presets (upper body, torso, head, legs, full body), layers (**See inside** hides the muscle layer; **With muscle** shows everything) and an **AI findings** overlay.
+- **AI on the anatomy**: callouts are pinned to the heart, brain, lymphatic nodes and skeleton, follow the camera, and open the matching system when tapped. Hovering a system in the index brings it forward.
+- **Interaction**: drag to orbit, scroll or pinch to zoom, hover a structure for its name, tap to bring its system forward.
+
+Key files: `src/components/body/anatomyEngine.ts` (engine), `AtlasBodyScene.tsx` (maps AURA systems to atlas systems, pins callouts), `AtlasStage.tsx` (hero and Intelligence stage), `presets.ts` (framings, views, layers), `src/lib/anatomy/` (data loading). Model credits and licences: [ATTRIBUTION.md](ATTRIBUTION.md).
+
+If the atlas files can't open (not installed, or no WebGL2), `BodyTwin.tsx` provides a lightweight built-in 3D body so there is always something to orbit.
+
+---
+
+## Readable by design
+
+- **Larger text throughout**: every font size is rem-based with a comfortable minimum, so nothing important is tiny.
+- **Text size control**: *Profile → Text size* offers Standard, Large and Extra large, scaling the whole interface and remembered between visits.
+- Kumbh Sans for body text, high-contrast tokens, visible focus rings, dialog focus trapping, Escape-to-close, keyboard-reachable 3D labels, `aria-live` copilot answers, and a **Reduce motion** setting that also respects the OS preference.
+
+![Extra large text](docs/screenshots/dashboard-xl.png)
+
+---
+
+## Configuration
+
+| Variable | Where | Purpose |
+| --- | --- | --- |
+| `ANTHROPIC_API_KEY` | Server / `.env.local` | Enables the live Claude copilot. **Never** prefix with `VITE_`. |
+| `ANTHROPIC_MODEL` | Server | Model for the copilot. Defaults to `claude-sonnet-5-5`. |
+| `COPILOT_ALLOWED_ORIGIN` | Server | Optional. Only this origin may call `/api/copilot`. |
+| `VITE_COPILOT_ENDPOINT` | Build time | Optional. Point the UI at a different copilot URL. |
+
+The optional Tier 0/1/2 backend is configured in `src/api/`. Without it the app uses a labelled fallback snapshot. See [.env.example](.env.example).
+
+## Deploying
+
+The app is a static single-page build plus one optional serverless function.
+
+- **Vercel (recommended)**: import the repo, framework *Vite*. `api/copilot.ts` is picked up automatically as a function. Add `ANTHROPIC_API_KEY` under *Environment Variables* to enable live mode.
+- **Any static host**: run `npm run build` and serve `dist/`. Hash routing needs no rewrites. The copilot stays on-device unless you host the function elsewhere and set `VITE_COPILOT_ENDPOINT`.
+- Make sure `public/models/` ships with the build; it is not generated.
+
+## Project structure
+
+```text
+api/
+  copilot.ts              Serverless copilot endpoint (GET status, POST stream)
+src/
+  ai/
+    engine.ts             On-device analysis: baselines, forecasts, patterns, readiness, what-if
+    copilot.ts            Grounded local answers, live streaming client, status probe
+  api/                    Backend contract, client and adapters (optional live backend)
+  components/
+    ai/                   Copilot panel + launcher, AI hero, readiness ring, badges
+    body/                 Atlas engine, atlas scene/stage, presets, callouts, fallback twin
+    ui/                   Accessible primitives and charts
+    AppShell.tsx          Navigation, search, profile + text-size settings
+  data/                   Clearly simulated vitals, games and medical content
+  hooks/                  useAura (backend), useIntelligence (AI context)
+  lib/anatomy/            Atlas manifest types, loading, layout
+  pages/                  Route screens (+ games/)
+  stores/                 Zustand: crew, settings, app workflows, copilot
+  styles/                 design-system.css (tokens), ai.css, page styles using CSS @scope
+public/models/            Human-Atlas geometry (manifests + .bin.gz chunks)
+_technical_support/       Verification scripts and diagnostic evidence
+docs/                     Screenshots, documentation PDF, previous README
+```
+
+## Verifying changes
+
+```bash
+npx tsc --noEmit && npm run build && npm run lint
+```
+
+`_technical_support/ai-verification/` contains Playwright scripts used during development: a smoke test, a text-size and overflow sweep over every route, and a stand-in atlas generator that exercises the 3D code without the large model files. `_technical_support/aura-integration/` holds the mock backend and adapter tests.
+
+## Safety and honesty
+
+- **Everything is simulated.** Vitals, baselines, thresholds, forecasts, risk and confidence are illustrative. Crew profiles share the demo dataset.
+- **AI is advisory.** It never diagnoses, prescribes, creates alerts or claims clinical accuracy. Support percentages describe how strongly data backs a *pattern*, not the probability of illness.
+- **Local storage is not clinical storage.** Check-ins, exercise, PVT results, notes and preferences live unencrypted in your browser. Don't enter real patient data.
+- **Nothing is sent anywhere** except, when you enable live mode, the compact simulated readings and your question to the copilot function.
+- The Earth communication delay is simulated; no clinician availability or treatment approval is claimed.
+
+## Browser support
+
+Current Chrome, Edge, Safari or Firefox with CSS `@scope`, WebGL2 and `DecompressionStream` for the full atlas. Without them the app degrades gracefully to the built-in body.
+
+## Credits
+
+- Anatomy: BodyParts3D (CC BY 4.0), Human Reference Atlas / HuBMAP (CC BY 4.0), Visible Human Female leg muscles (CC BY 4.0). Details in [ATTRIBUTION.md](ATTRIBUTION.md).
+- Type: Bricolage Grotesque and Kumbh Sans via Fontsource.
+- Built with React, Vite, Three.js, Zustand, Framer Motion and Lucide.
+- The optional copilot uses Claude by Anthropic.
+
+---
+
+<div align="center">
+
+**Far from Earth. Never on your own.**
+
+</div>

@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import { Avatar, Badge, BrandMark, Dialog } from "./ui";
 import { useCrewStore } from "../stores/crewStore";
-import { useSettingsStore } from "../stores/settingsStore";
+import { TEXT_SCALE, useSettingsStore } from "../stores/settingsStore";
 import { useAppStore } from "../stores/appStore";
 import { isOpenOfficial } from "../utils/alerts";
 import { useAlerts, useAuraSync } from "../hooks/useAura";
@@ -139,6 +139,10 @@ export default function AppShell({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState("");
   const [preferences, setPreferences] = useState(false);
   useAuraSync();
+  const textSize = settings.textSize;
+  useEffect(() => {
+    document.documentElement.style.fontSize = TEXT_SCALE[textSize] ?? "100%";
+  }, [textSize]);
   const openAlerts = useAlerts().filter((a) =>
     isOpenOfficial(a, member.id, store, clock),
   ).length;
@@ -500,6 +504,30 @@ export default function AppShell({ children }: { children: ReactNode }) {
           >
             <span />
           </button>
+        </div>
+        <div className="preference-row text-size-row">
+          <div>
+            <strong>Text size</strong>
+            <p>Make everything easier to read. Applies across the whole app.</p>
+          </div>
+          <div className="text-size-options" role="group" aria-label="Text size">
+            {(
+              [
+                ["standard", "Standard"],
+                ["large", "Large"],
+                ["xl", "Extra large"],
+              ] as const
+            ).map(([id, label]) => (
+              <button
+                key={id}
+                type="button"
+                aria-pressed={settings.textSize === id}
+                onClick={() => settings.setTextSize(id)}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
         </div>
         <div className="privacy-note">
           <ShieldCheck size={18} />

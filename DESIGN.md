@@ -10,7 +10,7 @@ AURA is personal health support for people far from Earth: composed, human and p
 
 A forest sidebar anchors desktop navigation. The light workspace uses asymmetrical main-content and context columns, not a stretched mobile layout. A slim utility header holds search and crew selection. Mobile uses a compact header and bottom navigation. Oversized headings contrast with small uppercase clinical labels, structured chart panels and generous negative space. Cards use restrained 18–24px corners, thin warm-grey borders and almost no shadows.
 
-Use Bricolage Grotesque for display headings and Atkinson Hyperlegible for UI text and numbers. Transitions are 150–220ms; reduced motion disables nonessential movement. Modal dialogs trap focus, support Escape, restore focus and prevent background interaction. Destructive/dismissal decisions remain reversible when feasible.
+Use Bricolage Grotesque for display headings and Kumbh Sans for UI text and numbers. Transitions are 150–220ms; reduced motion disables nonessential movement. Modal dialogs trap focus, support Escape, restore focus and prevent background interaction. Destructive/dismissal decisions remain reversible when feasible.
 
 All clinical data and communication queues are demo data. Baseline changes are informational rather than diagnoses. Official rule cards and pattern advisories must remain distinct. No asset generation is needed for this internal dashboard; the existing visual health-app reference guides tone. A small external search reference set was inspected for navigation density, not copied or embedded. No external health factual claims are added.
 

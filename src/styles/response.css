@@ -20,9 +20,9 @@
     --success: #28704f;
     --success-soft: #e3f2e8;
     --display:
-      "Bricolage Grotesque Variable", "Atkinson Hyperlegible", system-ui,
+      "Bricolage Grotesque Variable", "Kumbh Sans Variable", system-ui,
       sans-serif;
-    --ui: "Atkinson Hyperlegible", system-ui, sans-serif;
+    --ui: "Kumbh Sans Variable", system-ui, sans-serif;
     color-scheme: light;
   }
 
@@ -49,7 +49,7 @@
     letter-spacing: -0.025em;
   }
   .response-page h1 {
-    font-size: clamp(2.3rem, 5vw, 4.8rem);
+    font-size: clamp(2.3rem, 5vw, 3.5rem);
     max-width: 760px;
   }
   .response-page h2 {
@@ -97,7 +97,7 @@
   }
   .eyebrow {
     color: var(--forest-2);
-    font-size: 0.72rem;
+    font-size: 0.8125rem;
     font-weight: 800;
     letter-spacing: 0.105em;
     line-height: 1.3;
@@ -108,7 +108,7 @@
     color: var(--muted);
   }
   .small-text {
-    font-size: 0.86rem;
+    font-size: 0.93rem;
     line-height: 1.45;
   }
   .small-link {
@@ -152,7 +152,7 @@
   .panel-heading p {
     margin-top: 5px;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.97rem;
   }
   .panel-heading h2 {
     margin: 0;
@@ -203,7 +203,7 @@
   .button.small {
     min-height: 34px;
     padding: 7px 11px;
-    font-size: 0.82rem;
+    font-size: 0.89rem;
   }
   .button:disabled {
     cursor: not-allowed;
@@ -233,7 +233,7 @@
     padding: 5px 9px;
     background: var(--paper-2);
     color: var(--muted);
-    font-size: 0.74rem;
+    font-size: 0.8125rem;
     font-weight: 800;
     white-space: nowrap;
   }
@@ -268,7 +268,7 @@
     padding: 12px 14px;
     color: var(--ink);
     background: var(--paper-2);
-    font-size: 0.9rem;
+    font-size: 0.97rem;
     line-height: 1.45;
   }
   .notice > svg {
@@ -305,7 +305,7 @@
     align-items: center;
     gap: 5px;
     color: var(--forest-2);
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -359,7 +359,7 @@
     color: var(--muted);
     background: transparent;
     font-weight: 800;
-    font-size: 0.82rem;
+    font-size: 0.89rem;
   }
   .tabs button.selected {
     color: var(--forest);
@@ -391,7 +391,7 @@
   .empty-state p {
     margin: 0;
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.97rem;
   }
   .empty-icon {
     display: grid;
@@ -584,7 +584,7 @@
     gap: 3px;
   }
   .alert-evidence strong {
-    font-size: 0.92rem;
+    font-size: 0.99rem;
   }
   .alert-action {
     margin: 12px 0 0;
@@ -593,7 +593,7 @@
     flex-wrap: wrap;
     margin-top: 14px;
     color: var(--muted);
-    font-size: 0.78rem;
+    font-size: 0.85rem;
   }
   .alert-meta span {
     display: inline-flex;
@@ -636,7 +636,7 @@
     background: var(--forest);
     color: #fff;
     box-shadow: 0 9px 28px rgba(23, 60, 53, 0.2);
-    font-size: 0.87rem;
+    font-size: 0.94rem;
   }
   .undo-bar .icon-button {
     color: rgba(255, 255, 255, 0.72);
@@ -801,7 +801,7 @@
   }
   .choice-card span {
     color: var(--muted);
-    font-size: 0.84rem;
+    font-size: 0.91rem;
   }
   .choice-card.selected,
   .choice-chip.selected {
@@ -821,7 +821,7 @@
     background: #fff;
     color: var(--ink);
     font-weight: 700;
-    font-size: 0.86rem;
+    font-size: 0.93rem;
   }
   .choice-chip:hover,
   .choice-card:hover {
@@ -831,7 +831,7 @@
     display: flex;
     justify-content: space-between;
     color: var(--muted);
-    font-size: 0.75rem;
+    font-size: 0.82rem;
   }
   .error-list {
     margin: 5px 0 0;
@@ -862,7 +862,7 @@
   }
   .vital-row small {
     color: var(--muted);
-    font-size: 0.77rem;
+    font-size: 0.84rem;
   }
   .vital-row b {
     font-family: var(--display);
@@ -884,7 +884,7 @@
     border: 1px solid var(--line);
     border-radius: 11px;
     background: #fff;
-    font-size: 0.9rem;
+    font-size: 0.97rem;
   }
   .review-summary {
     display: grid;
@@ -905,7 +905,7 @@
   }
   .review-section > span:last-child {
     color: var(--muted);
-    font-size: 0.9rem;
+    font-size: 0.97rem;
     line-height: 1.45;
   }
   .saved-panel {
@@ -926,7 +926,7 @@
     gap: 4px;
     margin-top: 10px;
     color: var(--muted);
-    font-size: 0.82rem;
+    font-size: 0.89rem;
   }
   .saved-metadata strong {
     color: var(--ink);
@@ -1047,29 +1047,29 @@
     min-height: 0;
   }
   .page-heading h1 {
-    font-size: 37px;
+    font-size: 2.3125rem;
     line-height: 1.12;
     font-weight: 500;
     letter-spacing: -0.04em;
   }
   .page-heading p {
-    font-size: 12px;
+    font-size: 0.875rem;
     margin-top: 10px;
   }
   .page-heading .eyebrow {
-    font-size: 9px;
+    font-size: 0.8125rem;
   }
   .page-heading {
     padding-bottom: 0;
   }
   @media (max-width: 1200px) {
     .page-heading h1 {
-      font-size: 33px;
+      font-size: 2.0625rem;
     }
   }
   @media (max-width: 600px) {
     .page-heading h1 {
-      font-size: 32px;
+      font-size: 2rem;
     }
     .page-heading {
       display: flex;

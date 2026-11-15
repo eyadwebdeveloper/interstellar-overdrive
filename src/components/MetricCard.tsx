@@ -63,7 +63,7 @@ export default function MetricCard({ vital, compact = false, showSpark = true }:
 
       <div className="rf-tile-foot">
         <StatusPill level={pillLevel} label={vital.statusLabel} small />
-        <span className="rf-note" style={{ fontSize: 10.5 }}>{vital.confidence}% conf.</span>
+        <span className="rf-note" style={{ fontSize: 12.5 }}>{vital.confidence}% conf.</span>
       </div>
     </div>
   )

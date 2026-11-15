@@ -219,7 +219,7 @@ export default function ClockGame() {
                         x={tx}
                         y={ty + 3}
                         textAnchor="middle"
-                        fontSize="9"
+                        fontSize="10.5"
                         fill="#6d7973"
                       >
                         {String(h).padStart(2, "0")}
@@ -393,7 +393,7 @@ export default function ClockGame() {
                         x={22 + (h / 24) * 256}
                         y="82"
                         textAnchor="middle"
-                        fontSize="8.5"
+                        fontSize="10"
                         fill="#6d7973"
                       >
                         {String(h).padStart(2, "0")}
