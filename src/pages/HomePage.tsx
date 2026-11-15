@@ -42,6 +42,7 @@ import { useAlerts } from "../hooks/useAura";
 import { useAppStore } from "../stores/appStore";
 import { useCrewStore } from "../stores/crewStore";
 import { isOpenOfficial } from "../utils/alerts";
+import AiHero from "../components/ai/AiHero";
 import { FadeIn, useMotionAllowed, EASE } from "../components/motion";
 import "../styles/home.css";
 
@@ -137,6 +138,7 @@ export default function HomePage() {
           </div>
         }
       />
+      <AiHero />
       <div className="home-layout">
         <div className="home-main">
           <section className="wellbeing-hero">

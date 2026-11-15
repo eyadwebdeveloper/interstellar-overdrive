@@ -13,6 +13,7 @@ const ExercisePage = lazy(() => import("./pages/ExercisePage"));
 const SupportPage = lazy(() => import("./pages/SupportPage"));
 const PvtPage = lazy(() => import("./pages/PvtPage"));
 const MedicalEventPage = lazy(() => import("./pages/MedicalEventPage"));
+const IntelligencePage = lazy(() => import("./pages/IntelligencePage"));
 const GamesHub = lazy(() => import("./pages/GamesHub"));
 const FuelGame = lazy(() => import("./pages/games/FuelGame"));
 const LoadGame = lazy(() => import("./pages/games/LoadGame"));
@@ -43,6 +44,7 @@ function RoutedApp() {
           <Routes location={location}>
             <Route path="/" element={<HomePage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/intelligence" element={<IntelligencePage />} />
           <Route path="/body" element={<BodyLab />} />
           <Route path="/system/:systemId" element={<SystemDetailPage />} />
           <Route path="/alerts" element={<AlertsPage />} />

@@ -12,7 +12,7 @@ export default function SimulatedBanner() {
         : 'Local backend not reachable, so built-in demo data is shown.'
   return (
     <div className="api-banner" role="note">
-      <strong>Simulated data.</strong> {origin} Advisory output is not a diagnosis and does not replace
+      <strong>Simulated data.</strong> {origin} AURA’s on-device AI adds patterns and forecasts. Advisory output is not a diagnosis and does not replace
       clinical judgment or official procedures.
     </div>
   )

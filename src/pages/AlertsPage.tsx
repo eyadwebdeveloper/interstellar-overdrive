@@ -28,6 +28,7 @@ import { useAlerts } from "../hooks/useAura";
 import SimulatedBanner from "../components/SimulatedBanner";
 import { scopedKey, useAppStore } from "../stores/appStore";
 import { useCrewStore } from "../stores/crewStore";
+import { useCopilotStore } from "../stores/copilotStore";
 import { timeAgo } from "../utils/dateUtils";
 import "../styles/response.css";
 
@@ -189,6 +190,7 @@ function AdvisoryCard({
   handled?: boolean;
   onRestore?: () => void;
 }) {
+  const openWith = useCopilotStore((s) => s.openWith);
   return (
     <article className="response-advisory">
       <div className="spread alert-title-row">
@@ -234,6 +236,12 @@ function AdvisoryCard({
             </button>
           </>
         )}
+        <button
+          className="button secondary small"
+          onClick={() => openWith(`Explain this advisory pattern in plain language: ${alert.title}`)}
+        >
+          <Sparkles size={15} /> Explain with AURA
+        </button>
         {alert.system && (
           <Link className="text-link small-link" to={`/system/${alert.system}`}>
             Show system <ChevronRight size={14} />

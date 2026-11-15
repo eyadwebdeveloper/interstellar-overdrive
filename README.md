@@ -41,11 +41,35 @@ The models stream as binary chunks (gzip, ~70 MB total across the three sets, lo
 
 `src/components/body/anatomyEngine.ts` holds the 3D engine; `src/components/body/AtlasBodyScene.tsx` maps the four workspace systems onto atlas systems; `src/lib/anatomy/` loads and lays out the model data. The geometry files live in `public/models/` (manifests plus `.bin.gz` chunks; the plain `.bin` twins of the original repository are not shipped — the runtime uses `DecompressionStream`, and browsers without it fall back to the systems index gracefully). Model data credits and licences: see `ATTRIBUTION.md`.
 
+
+## AURA Intelligence — the AI layer
+
+The AI is front and centre on Overview (a dark "AURA Intelligence" hero with a live 3D body), in a floating **Ask AURA** copilot available on every page (`Ctrl/Cmd + J`, or `/`), and on its own page at `#/intelligence`.
+
+- **On-device engine** (`src/ai/engine.ts`): personal baselines (median + MAD of the first week), drift scores, 7-day forecasts with an empirical band, cross-signal patterns (sleep → reaction time, recovery debt), a readiness score with named drivers, ranked next steps, and a personal response model fitted on the person's own 14 days. Deterministic, offline, no network.
+- **Copilot** (`src/ai/copilot.ts`, `src/stores/copilotStore.ts`, `src/components/ai/`): grounded answers with "Based on" evidence chips and action buttons. Emergency wording is routed to official procedures, never answered clinically.
+- **Live Claude (optional)**: `api/copilot.ts` is a serverless function (Vercel). Set `ANTHROPIC_API_KEY` on the server and the copilot switches from "On-device" to "Claude · live", streaming answers grounded on the same compact readings JSON. The key never reaches the browser. See `.env.example`. With no key the app keeps working on the on-device engine.
+- **What-if simulator** (`#/intelligence#what-if`): change sleep and aerobic time and see projected readiness. Sleep effects are fitted from the person's own data; aerobic effects are a small, labelled assumption.
+- **Authority rule unchanged**: only Tier 0 rules create official alerts. Everything AI-made is labelled advisory and shows its evidence.
+
+## 3D, always visible — the atlas, framed close
+
+The Human-Atlas models are now the only 3D body used across the app: Overview (AI hero), the Intelligence page and the Body view. They open on a **dark observatory stage** (glass platform, tick ring, drifting dust, a slow scan sweep, floor glow and vignette) and start **close**: head to hips, instead of a distant full-body shot.
+
+- **Body view controls** (`#/body`): angle (front, 3/4, side, **back**), zoom presets (upper body, torso, head, legs, full body), layers (**See inside** hides the muscle layer so bones and organs read; **With muscle** shows everything) and an **AI findings** overlay.
+- **AI on the real anatomy:** callouts are pinned to the structures they concern (heart, brain, lymphatic nodes, skeleton), follow the camera, and open the matching system when tapped. Hovering a system in the index brings it forward.
+- **Overview and Intelligence** use a curated "see inside" layer set so only the chunks they need are downloaded.
+- `src/components/body/presets.ts` holds the framings, views and layers; `anatomyEngine.ts` gained `setFraming`, `projectSystem`, a dark stage theme and ambient effects.
+- `BodyTwin.tsx` (procedural body) is now only a safety net, used if the atlas files can't open (not installed on the host, or no WebGL2).
+
+
+> Note: `public/models/` and the Python backend were not part of the delivered zip. Keep your `public/models/` folder in place. `_technical_support/ai-verification/make_fake_atlas.py` builds a tiny stand-in atlas used only for tests.
+
 ## Persistence and simulation boundaries
 
 Crew-scoped check-ins, exercise records, PVT results, support notes and alert actions are stored in this browser's localStorage. Check-in drafts are also restored per crew member. Medical reports are separate recipient-labelled local queue entries and do not appear in Support's note list. Profile and motion preferences persist locally.
 
-Vital values, baselines, chart series, conditioning scores, mission details, rule thresholds and confidence percentages are illustrative demo data. Crew profiles share the demo vital dataset. The indicated Earth delay is simulated: nothing is sent, delivered or monitored. Advisory patterns are static examples, not a live AI service. No clinician availability or treatment approval is claimed.
+Vital values, baselines, chart series, conditioning scores, mission details, rule thresholds and confidence percentages are illustrative demo data. Crew profiles share the demo vital dataset. The indicated Earth delay is simulated: nothing is sent, delivered or monitored. Advisory patterns come from the on-device AI engine (and the optional backend); they are not clinical output. No clinician availability or treatment approval is claimed.
 
 LocalStorage is not encrypted clinical storage. Do not enter real patient data. There is no server, authentication, telemetry feed, real communication link or clinical decision engine in this delivery.
 

@@ -60,6 +60,20 @@ export interface EngineCallbacks {
   onActivate: (partId: string) => void;
   onProgress: (p: { loaded: number; total: number } | null) => void;
   onError: (message: string) => void;
+  /** Called after every rendered frame (labels use it to follow the camera). */
+  onRender?: () => void;
+}
+
+export type StageTheme = 'light' | 'dark';
+
+export interface EngineOptions {
+  theme?: StageTheme;
+}
+
+/** How much of the body the camera frames: visible height in metres, and the height it looks at. */
+export interface Framing {
+  height: number;
+  targetY: number;
 }
 
 const ACCENT = new THREE.Color("#24554b");
@@ -132,10 +146,18 @@ export class AnatomyEngine {
   private lastFocus = -1;
   private lastView: ViewId | '' = '';
   private loadingKey = '';
+  private theme: StageTheme;
+  private framing: Framing | null = null;
+  private ambient = false;
+  private scanner?: THREE.Mesh;
+  private dust?: THREE.Points;
+  private orbit?: THREE.Group;
+  private anchorCache = new Map<string, THREE.Box3 | null>();
 
-  constructor(host: HTMLElement, cb: EngineCallbacks) {
+  constructor(host: HTMLElement, cb: EngineCallbacks, opts: EngineOptions = {}) {
     this.host = host;
     this.cb = cb;
+    this.theme = opts.theme ?? 'light';
     try {
       this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     } catch {
@@ -168,12 +190,13 @@ export class AnatomyEngine {
       this.dirty = true;
     });
 
-    // Lighting matched to the AURA paper stage: warm key, mint rim.
-    this.scene.add(new THREE.HemisphereLight(0xf7f8f3, 0xc5d5c8, 1.05));
-    const key = new THREE.DirectionalLight(0xfff6ea, 1.35);
+    // Light stage: warm key, mint rim. Dark stage: cooler fill, stronger mint rim for edge definition.
+    const dark = this.theme === 'dark';
+    this.scene.add(dark ? new THREE.HemisphereLight(0xd4ece1, 0x0c1f1a, 1.0) : new THREE.HemisphereLight(0xf7f8f3, 0xc5d5c8, 1.05));
+    const key = new THREE.DirectionalLight(0xfff6ea, dark ? 1.5 : 1.35);
     key.position.set(2.8, 4.4, 2.6);
     this.scene.add(key);
-    const rim = new THREE.DirectionalLight(0xc1ebc9, 0.72);
+    const rim = new THREE.DirectionalLight(dark ? 0x8fe3b4 : 0xc1ebc9, dark ? 1.25 : 0.72);
     rim.position.set(-2.8, 2.2, -2.4);
     this.scene.add(rim);
     const fill = new THREE.DirectionalLight(0xe7f3ea, 0.35);
@@ -194,7 +217,22 @@ export class AnatomyEngine {
   }
 
   // ---------------------------------------------------------------- stage --
+  private radialTexture(inner: string, outer: string) {
+    const c = document.createElement('canvas');
+    c.width = c.height = 256;
+    const g = c.getContext('2d')!;
+    const grad = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+    grad.addColorStop(0, inner);
+    grad.addColorStop(1, outer);
+    g.fillStyle = grad;
+    g.fillRect(0, 0, 256, 256);
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  }
+
   private buildStage() {
+    if (this.theme === 'dark') return this.buildDarkStage();
     const floor = new THREE.Mesh(
       new THREE.CircleGeometry(30, 64),
       new THREE.MeshStandardMaterial({ color: 0xe7f0e8, roughness: 1 })
@@ -219,6 +257,113 @@ export class AnatomyEngine {
     ring2.rotation.x = -Math.PI / 2;
     ring2.position.y = 0.002;
     this.stage.add(floor, platform, ring, ring2);
+  }
+
+  /** Observatory stage: glowing floor, glass platform, tick ring, drifting dust and a slow scan sweep. */
+  private buildDarkStage() {
+    const flat = -Math.PI / 2;
+    // Floor that fades into the page background so there is no hard horizon.
+    const floorTex = this.radialTexture('rgba(46,112,92,0.85)', 'rgba(14,40,35,0)');
+    const floor = new THREE.Mesh(
+      new THREE.CircleGeometry(4.2, 64),
+      new THREE.MeshBasicMaterial({ map: floorTex, transparent: true, depthWrite: false })
+    );
+    floor.rotation.x = flat;
+    floor.position.y = -0.03;
+    // Contact shadow.
+    const shadow = new THREE.Mesh(
+      new THREE.CircleGeometry(0.62, 48),
+      new THREE.MeshBasicMaterial({ map: this.radialTexture('rgba(0,0,0,0.55)', 'rgba(0,0,0,0)'), transparent: true, depthWrite: false })
+    );
+    shadow.rotation.x = flat;
+    shadow.position.y = -0.005;
+    // Glass platform.
+    const platform = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.62, 0.66, 0.02, 96),
+      new THREE.MeshStandardMaterial({ color: 0x1b4a3e, metalness: 0.5, roughness: 0.25, transparent: true, opacity: 0.85 })
+    );
+    platform.position.y = -0.012;
+    const mkRing = (r0: number, r1: number, color: number, opacity: number) => {
+      const m = new THREE.Mesh(
+        new THREE.RingGeometry(r0, r1, 160),
+        new THREE.MeshBasicMaterial({ color, transparent: true, opacity, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending })
+      );
+      m.rotation.x = flat;
+      m.position.y = 0.003;
+      return m;
+    };
+    this.stage.add(floor, shadow, platform, mkRing(0.6, 0.612, 0x8fe3b4, 0.9), mkRing(0.5, 0.506, 0x8fe3b4, 0.45), mkRing(1.05, 1.058, 0x8fe3b4, 0.22), mkRing(1.6, 1.606, 0x8fe3b4, 0.12));
+
+    // Tick marks on a slowly turning orbit ring.
+    const orbit = new THREE.Group();
+    const tickGeo = new THREE.PlaneGeometry(0.008, 0.045);
+    const tickMat = new THREE.MeshBasicMaterial({ color: 0x8fe3b4, transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending });
+    for (let i = 0; i < 72; i++) {
+      const t = new THREE.Mesh(tickGeo, tickMat);
+      const a = (i / 72) * Math.PI * 2;
+      t.position.set(Math.cos(a) * 0.74, 0.004, Math.sin(a) * 0.74);
+      t.rotation.set(flat, 0, -a + Math.PI / 2);
+      t.scale.y = i % 6 === 0 ? 1.8 : 1;
+      orbit.add(t);
+    }
+    this.orbit = orbit;
+    this.stage.add(orbit);
+
+    // Scan sweep: a thin additive ring that climbs the body.
+    const scan = new THREE.Mesh(
+      new THREE.RingGeometry(0.34, 0.4, 96),
+      new THREE.MeshBasicMaterial({ color: 0x8fe3b4, transparent: true, opacity: 0.0, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending })
+    );
+    scan.rotation.x = flat;
+    this.scanner = scan;
+    this.scene.add(scan);
+
+    // Dust.
+    const n = 320;
+    const pos = new Float32Array(n * 3);
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const r = 0.5 + Math.random() * 2.2;
+      pos[i * 3] = Math.cos(a) * r;
+      pos[i * 3 + 1] = Math.random() * 3;
+      pos[i * 3 + 2] = Math.sin(a) * r;
+    }
+    const dg = new THREE.BufferGeometry();
+    dg.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+    this.dust = new THREE.Points(
+      dg,
+      new THREE.PointsMaterial({ color: 0xbfeed3, size: 0.012, transparent: true, opacity: 0.55, depthWrite: false, blending: THREE.AdditiveBlending, sizeAttenuation: true })
+    );
+    this.scene.add(this.dust);
+  }
+
+  /** Turn the ambient motion (scan sweep, drifting dust, turning ring) on or off. */
+  setAmbient(on: boolean) {
+    this.ambient = on;
+    if (this.scanner) (this.scanner.material as THREE.MeshBasicMaterial).opacity = 0;
+    this.dirty = true;
+  }
+
+  private tickAmbient(dt: number, now: number) {
+    if (!this.ambient || this.theme !== 'dark') return;
+    if (this.orbit) this.orbit.rotation.y += dt * 0.08;
+    if (this.dust) {
+      const p = (this.dust.geometry.getAttribute('position') as THREE.BufferAttribute);
+      for (let i = 0; i < p.count; i++) {
+        let y = p.getY(i) + dt * 0.035;
+        if (y > 3) y = 0;
+        p.setY(i, y);
+      }
+      p.needsUpdate = true;
+    }
+    if (this.scanner) {
+      const period = 7;
+      const t = (now / 1000 % period) / period;
+      this.scanner.position.y = t * 1.95;
+      const fade = Math.sin(t * Math.PI);
+      (this.scanner.material as THREE.MeshBasicMaterial).opacity = this.stage.visible ? 0.28 * fade : 0;
+    }
+    this.dirty = true;
   }
 
   // ------------------------------------------------------------- mounting --
@@ -272,6 +417,7 @@ export class AnatomyEngine {
   }
 
   private teardownAtlas() {
+    this.anchorCache.clear();
     for (const m of this.batchMeshes) {
       this.scene.remove(m);
       m.geometry.dispose();
@@ -294,14 +440,15 @@ export class AnatomyEngine {
     color.getHSL(hsl);
     // Atlas swatches were tuned for a dark stage. Cap lightness so they
     // stay readable on the paper viewport.
-    color.setHSL(hsl.h, Math.min(1, hsl.s * 1.08), Math.min(hsl.l, 0.58));
+    if (this.theme === 'dark') color.setHSL(hsl.h, Math.min(1, hsl.s * 1.05), Math.min(0.78, hsl.l * 1.05));
+    else color.setHSL(hsl.h, Math.min(1, hsl.s * 1.08), Math.min(hsl.l, 0.58));
     const mat = new THREE.MeshStandardMaterial({
       color,
       metalness: 0.04,
       roughness: 0.62,
       side: THREE.DoubleSide,
       transparent: system === 'integumentary',
-      opacity: system === 'integumentary' ? 0.13 : 1,
+      opacity: system === 'integumentary' ? (this.theme === 'dark' ? 0.09 : 0.13) : 1,
       depthWrite: system !== 'integumentary',
     });
     mat.onBeforeCompile = this.patchMaterial;
@@ -604,7 +751,7 @@ export class AnatomyEngine {
     this.materials.forEach((mat, system) => {
       const focused = !emphasizing || emphasis.has(system as SystemId);
       const ghost = emphasizing && !focused && system !== "integumentary";
-      const nextOpacity = system === "integumentary" ? 0.13 : ghost ? 0.16 : 1;
+      const nextOpacity = system === "integumentary" ? (this.theme === "dark" ? 0.09 : 0.13) : ghost ? (this.theme === "dark" ? 0.12 : 0.16) : 1;
       const nextTransparent = system === "integumentary" || ghost;
       if (mat.opacity !== nextOpacity || mat.transparent !== nextTransparent) {
         mat.opacity = nextOpacity;
@@ -632,7 +779,12 @@ export class AnatomyEngine {
     const h = el.clientHeight || 1;
     const aspect = w / h;
     const fov = THREE.MathUtils.degToRad(this.camera.fov / 2);
-    const normalDistance = Math.max(2.6, (h / Math.max(160, h - 260)) * 3.1);
+    const legacyDistance = Math.max(2.6, (h / Math.max(160, h - 260)) * 3.1);
+    // An explicit framing says how many metres of body should fill the view height.
+    // Width is protected so narrow phones never crop the shoulders.
+    const normalDistance = this.framing
+      ? Math.max(this.framing.height / (2 * Math.tan(fov)), 0.62 / Math.max(0.4, aspect) / (2 * Math.tan(fov)) * 1.05)
+      : legacyDistance;
     const packW = this.layout?.width ?? 0.6;
     const packH = this.layout?.height ?? 1.7;
     const atlasDistance =
@@ -643,7 +795,7 @@ export class AnatomyEngine {
       : view === 'back' ? new THREE.Vector3(0, 0.03, -1)
       : view === 'side' ? new THREE.Vector3(1, 0.03, 0)
       : new THREE.Vector3(0.42, 0.1, 1).normalize();
-    const targetY = STAGE_Y;
+    const targetY = THREE.MathUtils.lerp(this.framing?.targetY ?? STAGE_Y, STAGE_Y, Math.min(1, extent));
     this.tweenTo(targetY, dir, distance);
   }
 
@@ -657,6 +809,50 @@ export class AnatomyEngine {
       toTarget: target,
       t: 0,
       dur: 0.65,
+    };
+  }
+
+  /** Set how close the camera sits and what it looks at, then fly there. */
+  setFraming(framing: Framing, view?: ViewId) {
+    if (this.disposed) return;
+    this.framing = framing;
+    this.fit(view ?? this.state?.view ?? 'three-quarter', this.amount);
+  }
+
+  /** Union box of every loaded-or-known part in the given atlas systems. */
+  private systemBox(systems: SystemId[]): THREE.Box3 | null {
+    if (!this.atlas) return null;
+    const key = systems.join(',') + '@' + this.manifestUrl;
+    if (this.anchorCache.has(key)) return this.anchorCache.get(key) ?? null;
+    const box = new THREE.Box3();
+    const want = new Set(systems);
+    this.atlas.parts.forEach((p, i) => {
+      if (want.has(p.system)) box.union(this.bounds3[i]);
+    });
+    const out = box.isEmpty() ? null : box;
+    this.anchorCache.set(key, out);
+    return out;
+  }
+
+  private projected = new THREE.Vector3();
+
+  /** Screen position of a point on a system (yFrac: 0 bottom of its extent, 1 top). */
+  projectSystem(systems: SystemId[], yFrac = 0.5): { x: number; y: number; behind: boolean } | null {
+    const box = this.systemBox(systems);
+    if (!box) return null;
+    const c = box.getCenter(new THREE.Vector3());
+    c.y = box.min.y + (box.max.y - box.min.y) * yFrac;
+    c.z = box.max.z; // pin to the front surface so it reads on the visible side
+    const dCam = this.camera.position.distanceTo(c);
+    const dTarget = this.camera.position.distanceTo(this.controls.target);
+    this.projected.copy(c).project(this.camera);
+    const el = this.renderer.domElement;
+    const w = el.clientWidth;
+    const h = el.clientHeight;
+    return {
+      x: ((this.projected.x + 1) / 2) * w,
+      y: ((1 - this.projected.y) / 2) * h,
+      behind: dCam > dTarget + 0.35 || this.projected.z > 1,
     };
   }
 
@@ -855,10 +1051,12 @@ export class AnatomyEngine {
       if (this.tween.t >= 1) this.tween = null;
       this.dirty = true;
     }
+    this.tickAmbient(dt, now);
     this.controls.update();
     if (this.dirty) {
       this.renderer.render(this.scene, this.camera);
       this.dirty = false;
+      this.cb.onRender?.();
     }
   };
 

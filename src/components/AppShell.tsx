@@ -18,6 +18,7 @@ import {
   Settings,
   ShieldCheck,
   Siren,
+  Sparkles,
   Users,
 } from "lucide-react";
 import { Avatar, Badge, BrandMark, Dialog } from "./ui";
@@ -26,15 +27,23 @@ import { useSettingsStore } from "../stores/settingsStore";
 import { useAppStore } from "../stores/appStore";
 import { isOpenOfficial } from "../utils/alerts";
 import { useAlerts, useAuraSync } from "../hooks/useAura";
+import CopilotPanel from "./ai/CopilotPanel";
+import CopilotLauncher from "./ai/CopilotLauncher";
 
 const NAV = [
   { to: "/", label: "Overview", icon: LayoutDashboard },
+  { to: "/intelligence", label: "AURA Intelligence", icon: Sparkles, ai: true },
   { to: "/dashboard", label: "My health", icon: Activity },
   { to: "/checkin", label: "Check-in & tests", icon: ClipboardCheck },
   { to: "/exercise", label: "Exercise", icon: Dumbbell },
   { to: "/alerts", label: "Alerts", icon: Bell },
 ];
 const SEARCH = [
+  {
+    to: "/intelligence",
+    title: "AURA Intelligence",
+    detail: "AI readiness, patterns, forecasts and what-if simulator",
+  },
   {
     to: "/",
     title: "Overview",
@@ -171,6 +180,7 @@ export default function AppShell({ children }: { children: ReactNode }) {
           >
             <n.icon size={19} />
             <span>{n.label}</span>
+            {"ai" in n && n.ai && <span className="nav-ai">AI</span>}
             {n.to === "/alerts" && openAlerts > 0 && (
               <span className="nav-count">{openAlerts}</span>
             )}
@@ -370,6 +380,8 @@ export default function AppShell({ children }: { children: ReactNode }) {
           </nav>
         )}
       </div>
+      {!focus && <CopilotLauncher />}
+      <CopilotPanel />
       <Dialog
         open={menu}
         onClose={() => setMenu(false)}
